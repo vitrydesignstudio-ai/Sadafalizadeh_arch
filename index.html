@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f8fb" />
+  <title>صدف علیزاده — معماری، آموزش و ابزارهای دیجیتال</title>
+  <meta name="description" content="پورتفولیو معماری، آموزش‌های کاربردی و ابزارهای دیجیتال صدف علیزاده." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/v03.css" />
+  <link rel="stylesheet" href="assets/v04.css" />
+  <link rel="stylesheet" href="assets/v05.css" />
+</head>
+<body>
+  <div class="setup-banner" id="setupBanner" hidden><strong>Backend هنوز تنظیم نشده است.</strong><span>فایل <code>assets/config.js</code> را با URL و Anon Key پروژه Supabase تکمیل کن. تا آن زمان سایت در حالت Preview است.</span></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="site-grid" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="site-header" id="top">
+    <a class="brand" href="#top" aria-label="صفحه اصلی صدف علیزاده">
+      <span class="brand-mark">SA</span>
+      <span class="brand-copy"><strong>Sadaf Alizadeh</strong><small>@sadafalizadeh_arch</small></span>
+    </a>
+    <nav class="main-nav" aria-label="منوی اصلی">
+      <a href="#work" data-i18n="nav.work">نمونه‌کارها</a>
+      <a href="#learn" data-i18n="nav.learn">آموزش</a>
+      <a href="#tools" data-i18n="nav.tools">ابزارها</a>
+      <a href="#about" data-i18n="nav.about">درباره من</a>
+      <a href="#contact" data-i18n="nav.contact">تماس</a>
+    </nav>
+    <div class="header-actions">
+      <button class="account-pill" id="accountButton" type="button"><span id="accountIcon">◌</span><span id="accountLabel">ورود / عضویت</span></button>
+      <button class="lang-toggle" id="langToggle" type="button" aria-label="تغییر زبان">EN</button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="باز کردن منو"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero section-shell">
+      <div class="hero-kicker reveal"><span class="dot"></span><span data-i18n="hero.kicker">معماری · تجسم معماری · آموزش · ابزارهای دیجیتال</span></div>
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <h1><span data-i18n="hero.line1">طراحی فضا.</span><em data-i18n="hero.line2">ساختن ورک‌فلو.</em></h1>
+          <p data-i18n="hero.body">پروژه‌های معماری، آموزش‌های کاربردی و ابزارهایی که از نیاز واقعی کار حرفه‌ای ساخته می‌شوند.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#work"><span data-i18n="hero.ctaWork">مشاهده نمونه‌کارها</span><span>↗</span></a>
+            <a class="btn btn-ghost" href="#tools"><span data-i18n="hero.ctaTools">فروشگاه ابزارها</span><span>→</span></a>
+          </div>
+        </div>
+        <div class="hero-board reveal" aria-label="Architectural identity board">
+          <div class="board-label">SADAF / PLATFORM 05</div>
+          <div class="board-axes"><div class="axis axis-x"></div><div class="axis axis-y"></div></div>
+          <div class="board-shape shape-a"></div><div class="board-shape shape-b"></div><div class="board-shape shape-c"></div>
+          <svg class="board-sketch" viewBox="0 0 600 420" aria-hidden="true"><path d="M40 300 C140 242 190 340 290 265 S455 170 555 230"/><path d="M65 335 L205 210 L344 302 L522 118"/><circle cx="432" cy="116" r="54"/><rect x="128" y="85" width="114" height="80" rx="2"/></svg>
+          <div class="board-caption"><span>PORTFOLIO / LEARN / TOOLS</span><span>2026</span></div>
+        </div>
+      </div>
+      <div class="hero-meta reveal">
+        <div><strong>01</strong><span>پروژه‌های معماری</span></div><div><strong>02</strong><span>تجسم و CGI</span></div><div><strong>03</strong><span>آموزش</span></div><div><strong>04</strong><span>ابزار و پلاگین</span></div>
+      </div>
+    </section>
+
+    <section class="marquee" aria-label="Specialties"><div class="marquee-track"><span>ARCHITECTURE</span><b>✦</b><span>CGI</span><b>✦</b><span>AUTOCAD</span><b>✦</b><span>3DS MAX</span><b>✦</b><span>D5 RENDER</span><b>✦</b><span>LUMION</span><b>✦</b><span>AI TOOLS</span><b>✦</b><span>ARCHITECTURE</span><b>✦</b><span>CGI</span><b>✦</b><span>AUTOCAD</span></div></section>
+
+    <section class="section-shell section" id="work">
+      <div class="section-heading reveal"><div><span class="eyebrow">01 / PORTFOLIO</span><h2 data-i18n="work.title">پروژه‌های منتخب</h2></div><p data-i18n="work.body">پروژه‌ها از دیتابیس واقعی خوانده می‌شوند و از پنل مدیریت قابل انتشار و ویرایش هستند.</p></div>
+      <div class="filters reveal" id="workFilters"></div><div class="work-grid" id="workGrid"></div>
+    </section>
+
+    <section class="section-shell section split-section" id="learn">
+      <div class="section-heading sticky-heading reveal"><div><span class="eyebrow">02 / LEARN</span><h2 data-i18n="learn.title">آموزش‌ها</h2></div><p data-i18n="learn.body">آموزش‌های کوتاه و اجرایی برای معماری، رندر و ابزارهای دیجیتال.</p></div>
+      <div class="learn-list" id="learnList"></div>
+    </section>
+
+    <section class="section-shell section" id="tools">
+      <div class="section-heading reveal"><div><span class="eyebrow">03 / STORE</span><h2 data-i18n="tools.title">فروشگاه ابزارها</h2></div><p data-i18n="tools.body">اسکریپت، پلاگین، پریست و ابزار برای نرم‌افزارهای مختلف؛ رایگان یا پولی.</p></div>
+      <div class="store-toolbar reveal"><div class="category-scroll" id="toolCategories"></div><div class="store-note"><span class="live-dot"></span><span>خریدها و دانلودها به حساب واقعی کاربر متصل می‌شوند</span></div></div>
+      <div class="products-grid" id="productsGrid"></div>
+    </section>
+
+    <section class="section-shell section about-section" id="about">
+      <div class="about-index reveal">04</div><div class="about-copy reveal"><span class="eyebrow">ABOUT / SADAF</span><h2>معماری با نگاه سیستمی.</h2><p>این پلتفرم سه بخش از مسیر کاری من را کنار هم می‌آورد: پروژه‌ها، آموزش و ابزارهایی که از نیاز واقعی پروژه ساخته می‌شوند.</p><div class="about-tags"><span>AutoCAD</span><span>3ds Max</span><span>Corona</span><span>D5 Render</span><span>Lumion</span><span>Photoshop</span><span>AI</span></div></div>
+      <div class="about-diagram reveal" aria-hidden="true"><div class="diagram-ring ring-a"></div><div class="diagram-ring ring-b"></div><div class="diagram-line line-a"></div><div class="diagram-line line-b"></div><span class="diagram-label dl1">DESIGN</span><span class="diagram-label dl2">CG</span><span class="diagram-label dl3">TOOLS</span></div>
+    </section>
+
+    <section class="section-shell section contact-section" id="contact"><div class="contact-card reveal"><div><span class="eyebrow">05 / CONTACT</span><h2>پروژه، همکاری یا ایده‌ای برای ابزار داری؟</h2><p>برای درخواست پروژه یا همکاری می‌توانی از اینستاگرام در تماس باشی. فرم حرفه‌ای درخواست پروژه در فاز آنلاین اضافه می‌شود.</p></div><a class="contact-link" href="https://www.instagram.com/sadafalizadeh_arch/" target="_blank" rel="noreferrer"><span>@sadafalizadeh_arch</span><b>↗</b></a></div></section>
+  </main>
+
+  <footer class="site-footer section-shell"><div class="footer-brand"><strong>Sadaf Alizadeh</strong><span>Architecture · Education · Digital Tools</span></div><div class="footer-meta"><span>© 2026</span><a href="#top">بالا ↑</a></div></footer>
+
+  <!-- AUTH -->
+  <div class="modal" id="authModal" aria-hidden="true"><button class="modal-backdrop" data-close-modal aria-label="بستن"></button><article class="modal-panel auth-panel"><button class="modal-close" data-close-modal>×</button><div class="auth-head"><span class="eyebrow">ACCOUNT</span><h3>ورود یا عضویت</h3><p>خریدها، دانلودها و لایسنس‌ها به حساب شما متصل می‌شوند.</p></div><div class="auth-tabs"><button class="active" data-auth-tab="login">ورود</button><button data-auth-tab="register">عضویت</button></div>
+    <div class="auth-mode login-mode"><button class="active" type="button" data-login-mode="password">ورود با رمز</button><button type="button" data-login-mode="otp">ورود با کد پیامک</button></div>
+    <form id="loginForm" class="auth-form"><label>ایمیل یا شماره موبایل<input name="identity" required placeholder="example@email.com یا 09..." autocomplete="username"></label><label>رمز عبور<input name="password" type="password" required minlength="6" autocomplete="current-password"></label><button class="btn btn-primary" type="submit"><span>ورود امن</span><span>→</span></button><button class="text-action" id="forgotPasswordBtn" type="button">رمز عبور را فراموش کرده‌ام</button><p class="form-message" id="loginMessage"></p></form>
+    <form id="otpLoginForm" class="auth-form hidden"><label>شماره موبایل<input name="phone" required inputmode="tel" placeholder="09xxxxxxxxx" dir="ltr"></label><label id="otpTokenLabel" class="hidden">کد ۶ رقمی<input name="token" inputmode="numeric" maxlength="6" placeholder="123456" dir="ltr"></label><button class="btn btn-primary" type="submit"><span id="otpSubmitLabel">ارسال کد</span><span>→</span></button><p class="form-message" id="otpMessage"></p><small class="form-help">فعال بودن این گزینه به تنظیم سرویس SMS در Supabase وابسته است.</small></form>
+    <form id="registerForm" class="auth-form hidden"><div class="auth-mode"><button class="active" type="button" data-register-mode="email">ثبت‌نام با ایمیل</button><button type="button" data-register-mode="phone">ثبت‌نام با موبایل</button></div><input type="hidden" name="registerMode" value="email"><label>نام و نام خانوادگی<input name="name" required></label><div class="field-row"><label>شماره موبایل<input name="mobile" inputmode="tel" placeholder="09xxxxxxxxx"></label><label>ایمیل<input name="email" type="email" placeholder="example@email.com"></label></div><label>رمز عبور<input name="password" type="password" required minlength="8"></label><button class="btn btn-primary" type="submit"><span>ساخت حساب</span><span>+</span></button><p class="form-message" id="registerMessage"></p><small class="form-help">برای ثبت‌نام با موبایل، سرویس SMS باید در Backend فعال باشد. ایمیل و موبایل هر دو در پروفایل قابل نگهداری‌اند.</small></form>
+    <div class="demo-admin"><strong>Backend واقعی:</strong><span>این نسخه به Supabase Auth و دیتابیس امن متصل می‌شود.</span></div></article></div>
+
+  <!-- ACCOUNT DASHBOARD -->
+  <div class="modal dashboard-modal" id="dashboardModal" aria-hidden="true"><button class="modal-backdrop" data-close-modal></button><article class="dashboard-shell"><div class="dashboard-top"><div><span class="eyebrow">MY ACCOUNT</span><h3 id="dashboardTitle">حساب کاربری</h3></div><div class="dashboard-actions"><button class="mini-btn" id="adminOpenBtn" hidden>پنل مدیریت</button><button class="mini-btn danger" id="logoutBtn">خروج</button><button class="modal-close inline-close" data-close-modal>×</button></div></div><div class="dashboard-grid"><aside class="dashboard-nav"><button class="active" data-dash-tab="overview">نمای کلی</button><button data-dash-tab="downloads">دانلودهای من</button><button data-dash-tab="orders">سفارش‌ها</button><button data-dash-tab="licenses">لایسنس‌ها</button><button data-dash-tab="profile">پروفایل</button></aside><section class="dashboard-content" id="dashboardContent"></section></div></article></div>
+
+  <!-- PRODUCT -->
+  <div class="modal" id="productModal" aria-hidden="true"><button class="modal-backdrop" data-close-modal></button><article class="modal-panel product-modal-panel"><button class="modal-close" data-close-modal>×</button><div id="productModalContent"></div></article></div>
+
+  <!-- CHECKOUT -->
+  <div class="modal" id="checkoutModal" aria-hidden="true"><button class="modal-backdrop" data-close-modal></button><article class="modal-panel checkout-panel"><button class="modal-close" data-close-modal>×</button><span class="eyebrow">CHECKOUT</span><h3>ثبت سفارش</h3><div id="checkoutSummary"></div><div class="payment-methods"><button class="payment-card active" data-pay-method="card" type="button"><strong>کارت‌به‌کارت</strong><span>تأیید دستی توسط مدیر</span></button><button class="payment-card" data-pay-method="gateway" id="gatewayMethodBtn" type="button"><strong>درگاه آنلاین</strong><span id="gatewayMethodHint">پرداخت و فعال‌سازی خودکار</span></button></div><form id="cardPaymentForm" class="auth-form"><div class="bank-box"><span>اطلاعات کارت‌به‌کارت</span><strong id="bankCardNumber">در حال دریافت از تنظیمات سایت…</strong><small id="bankCardOwner">—</small></div><label>شماره پیگیری / توضیح پرداخت<input name="reference" required placeholder="مثلاً 123456"></label><label>تصویر رسید پرداخت<input name="receipt" type="file" accept="image/*,.pdf" required></label><button class="btn btn-primary" type="submit"><span>ثبت سفارش و رسید</span><span>✓</span></button><p class="form-message" id="paymentMessage"></p></form><div id="gatewayPaymentBox" class="auth-form hidden"><div class="gateway-box"><strong>پرداخت آنلاین</strong><p>بعد از بازگشت از درگاه، پرداخت روی سرور Verify می‌شود و محصول خودکار وارد «دانلودهای من» خواهد شد.</p></div><button class="btn btn-primary" id="gatewayPayBtn" type="button"><span>رفتن به درگاه</span><span>↗</span></button><p class="form-message" id="gatewayMessage"></p></div></article></div>
+
+
+  <!-- PASSWORD RECOVERY -->
+  <div class="modal" id="passwordRecoveryModal" aria-hidden="true"><button class="modal-backdrop" data-close-modal></button><article class="modal-panel auth-panel"><button class="modal-close" data-close-modal>×</button><div class="auth-head"><span class="eyebrow">SECURITY</span><h3>تنظیم رمز عبور جدید</h3><p>رمز جدید را حداقل ۸ کاراکتر انتخاب کن.</p></div><form id="newPasswordForm" class="auth-form"><label>رمز عبور جدید<input name="password" type="password" minlength="8" required autocomplete="new-password"></label><label>تکرار رمز<input name="confirm" type="password" minlength="8" required autocomplete="new-password"></label><button class="btn btn-primary" type="submit">ذخیره رمز جدید</button><p class="form-message" id="newPasswordMessage"></p></form></article></div>
+
+  <!-- ADMIN -->
+  <div class="modal dashboard-modal" id="adminModal" aria-hidden="true"><button class="modal-backdrop" data-close-modal></button><article class="dashboard-shell admin-shell"><div class="dashboard-top"><div><span class="eyebrow">ADMIN / SADAF</span><h3>پنل مدیریت محتوا و فروش</h3></div><div class="dashboard-actions"><button class="modal-close inline-close" data-close-modal>×</button></div></div><div class="dashboard-grid"><aside class="dashboard-nav"><button class="active" data-admin-tab="overview">داشبورد</button><button data-admin-tab="projects">پروژه‌ها</button><button data-admin-tab="products">محصولات</button><button data-admin-tab="lessons">آموزش‌ها</button><button data-admin-tab="orders">سفارش‌ها</button><button data-admin-tab="users">کاربران</button><button data-admin-tab="settings">تنظیمات</button></aside><section class="dashboard-content" id="adminContent"></section></div></article></div>
+
+  <!-- PROJECT -->
+  <div class="modal" id="projectModal" aria-hidden="true"><button class="modal-backdrop" data-close-modal></button><article class="modal-panel"><button class="modal-close" data-close-modal>×</button><div id="projectModalContent"></div></article></div>
+
+  <div class="toast-stack" id="toastStack"></div>
+  <script src="assets/config.js"></script>
+  <script src="data/seed.js"></script>
+  <script src="assets/app.js"></script>
+</body></html>

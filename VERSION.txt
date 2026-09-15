@@ -1,0 +1,5 @@
+SadafAlizadeh_arch Platform
+Version: 0.6.0 DEPLOY READY
+Frontend: Persian-first RTL + English
+Hosting target: Vercel
+Backend target: Supabase

@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f8fb" />
+  <title>صدف علیزاده — معماری، آموزش و ابزارهای دیجیتال</title>
+  <meta name="description" content="پورتفولیو معماری، آموزش‌های کاربردی و ابزارهای دیجیتال صدف علیزاده." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --bg: #f7f8fb;
+  --paper: #ffffff;
+  --ink: #111820;
+  --muted: #6d7887;
+  --line: #dfe4ea;
+  --blue: #1b6cf2;
+  --blue-dark: #0b4fc8;
+  --blue-soft: #eaf2ff;
+  --radius: 2px;
+  --shell: min(1420px, calc(100vw - 64px));
+  --shadow: 0 18px 55px rgba(24, 42, 74, .09);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Manrope", "DM Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+html[dir="rtl"] body { font-family: "Vazirmatn", "Manrope", sans-serif; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }
+::selection { background: var(--blue); color: #fff; }
+
+.site-grid {
+  position: fixed; inset: 0; z-index: -3; pointer-events: none; opacity: .48;
+  background-image:
+    linear-gradient(to right, rgba(55,77,104,.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(55,77,104,.055) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.noise { position: fixed; inset: 0; z-index: -2; pointer-events: none; opacity: .025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E"); }
+.cursor-dot { width: 10px; height: 10px; border-radius: 50%; position: fixed; z-index: 80; background: var(--blue); pointer-events: none; transform: translate(-50%,-50%); opacity: 0; transition: opacity .2s; }
+
+.section-shell { width: var(--shell); margin: 0 auto; }
+.section { padding: 120px 0; }
+
+.site-header {
+  width: var(--shell); height: 82px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 60; backdrop-filter: blur(16px); background: rgba(247,248,251,.86); border-bottom: 1px solid rgba(188,198,210,.6);
+}
+.brand { display: flex; align-items: center; gap: 12px; min-width: 240px; }
+.brand-mark { width: 36px; height: 36px; display: grid; place-items: center; background: var(--ink); color: #fff; font-weight: 700; font-size: 12px; letter-spacing: .08em; }
+.brand-copy { display: grid; line-height: 1.15; }
+.brand-copy strong { font-size: 13px; letter-spacing: .02em; }
+.brand-copy small { color: var(--muted); font-size: 10px; margin-top: 4px; }
+.main-nav { display: flex; align-items: center; gap: 30px; }
+.main-nav a { position: relative; font-size: 12px; font-weight: 600; color: #33404e; }
+.main-nav a::after { content:""; position: absolute; left: 0; right: 100%; bottom: -8px; height: 1px; background: var(--blue); transition: .25s ease; }
+.main-nav a:hover::after { right: 0; }
+.header-actions { display: flex; gap: 10px; min-width: 240px; justify-content: flex-end; }
+.lang-toggle, .menu-toggle { border: 1px solid var(--line); background: rgba(255,255,255,.85); height: 36px; cursor: pointer; }
+.lang-toggle { width: 44px; font-size: 11px; font-weight: 700; }
+.menu-toggle { display: none; width: 40px; place-content: center; gap: 5px; }
+.menu-toggle span { display: block; width: 16px; height: 1px; background: var(--ink); }
+
+.hero { padding: 54px 0 36px; min-height: calc(100vh - 82px); display: flex; flex-direction: column; justify-content: space-between; }
+.hero-kicker { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 5px var(--blue-soft); }
+.hero-grid { display: grid; grid-template-columns: 1.02fr .98fr; gap: 80px; align-items: center; margin: 46px 0 32px; }
+.hero-copy h1 { margin: 0; font-size: clamp(58px, 6.6vw, 112px); line-height: .92; letter-spacing: -.065em; font-weight: 600; max-width: 850px; }
+.hero-copy h1 span, .hero-copy h1 em { display: block; }
+.hero-copy h1 em { font-style: normal; color: var(--blue); }
+.hero-copy p { max-width: 640px; margin: 34px 0 0; color: var(--muted); font-size: 16px; line-height: 1.9; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+.btn { min-height: 48px; padding: 0 18px; display: inline-flex; align-items: center; justify-content: space-between; gap: 28px; border: 1px solid transparent; cursor: pointer; transition: transform .2s, background .2s, color .2s, border .2s; font-weight: 600; font-size: 12px; }
+.btn:hover { transform: translateY(-2px); }
+.btn-primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+.btn-primary:hover { background: var(--blue-dark); }
+.btn-ghost { background: transparent; border-color: #cfd6df; }
+.btn-ghost:hover { border-color: var(--ink); }
+
+.hero-board { position: relative; aspect-ratio: 1.15; background: var(--paper); border: 1px solid var(--line); overflow: hidden; box-shadow: var(--shadow); }
+.hero-board::before { content:""; position: absolute; inset: 0; background-image: linear-gradient(to right, rgba(27,108,242,.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(27,108,242,.08) 1px, transparent 1px); background-size: 32px 32px; }
+.board-label { position: absolute; top: 18px; left: 18px; font-size: 9px; letter-spacing: .22em; color: var(--muted); }
+.board-caption { position: absolute; bottom: 18px; left: 18px; right: 18px; display: flex; justify-content: space-between; color: var(--muted); font-size: 8px; letter-spacing: .14em; }
+.axis { position:absolute; background: rgba(17,24,32,.4); }
+.axis-x { height: 1px; left: 8%; right: 8%; top: 50%; }
+.axis-y { width: 1px; top: 8%; bottom: 8%; left: 50%; }
+.board-shape { position: absolute; border: 1px solid var(--ink); background: rgba(255,255,255,.62); }
+.shape-a { width: 34%; height: 52%; left: 13%; top: 22%; transform: rotate(-8deg); }
+.shape-b { width: 26%; height: 42%; right: 13%; top: 19%; transform: rotate(12deg); border-color: var(--blue); }
+.shape-c { width: 22%; aspect-ratio: 1; border-radius: 50%; left: 42%; bottom: 10%; border-color: var(--blue); background: rgba(234,242,255,.55); }
+.board-sketch { position: absolute; inset: 7%; width: 86%; height: 86%; fill: none; stroke: rgba(27,108,242,.55); stroke-width: 1.15; stroke-dasharray: 4 5; }
+.hero-meta { border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(4,1fr); }
+.hero-meta div { min-height: 78px; display: flex; align-items: center; gap: 14px; border-right: 1px solid var(--line); padding: 0 20px; }
+.hero-meta div:last-child { border-right: none; }
+.hero-meta strong { color: var(--blue); font-size: 11px; }
+.hero-meta span { font-size: 11px; color: var(--muted); }
+
+.marquee { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(255,255,255,.55); }
+.marquee-track { width: max-content; display: flex; gap: 28px; align-items: center; padding: 16px 0; animation: marquee 28s linear infinite; color: #9ba6b3; font-size: 11px; letter-spacing: .2em; }
+.marquee-track b { color: var(--blue); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+.section-heading { display: grid; grid-template-columns: 1fr minmax(340px, 520px); gap: 60px; align-items: end; margin-bottom: 56px; }
+.eyebrow { display: block; color: var(--blue); font-size: 10px; letter-spacing: .17em; font-weight: 700; margin-bottom: 15px; }
+.section-heading h2, .about-copy h2, .contact-card h2 { margin: 0; font-size: clamp(40px, 4.5vw, 72px); line-height: 1; letter-spacing: -.045em; font-weight: 600; }
+.section-heading p, .about-copy p, .contact-card p { margin: 0; color: var(--muted); line-height: 1.9; font-size: 14px; }
+.filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 26px; }
+.filter-btn { border: 1px solid var(--line); padding: 9px 13px; background: rgba(255,255,255,.6); color: var(--muted); font-size: 10px; font-weight: 600; cursor: pointer; }
+.filter-btn.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+.work-grid { display: grid; grid-template-columns: repeat(12,1fr); gap: 18px; }
+.project-card { position: relative; min-height: 430px; background: var(--paper); border: 1px solid var(--line); overflow: hidden; cursor: pointer; transition: transform .25s ease, box-shadow .25s ease; }
+.project-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.project-card:nth-child(5n+1), .project-card:nth-child(5n+4) { grid-column: span 7; }
+.project-card:nth-child(5n+2), .project-card:nth-child(5n+3) { grid-column: span 5; }
+.project-card:nth-child(5n+5) { grid-column: span 12; min-height: 360px; }
+.project-art { height: 72%; position: relative; overflow: hidden; background: linear-gradient(135deg,#edf2f7,#fff); }
+.project-art::before, .project-art::after { content:""; position:absolute; border: 1px solid rgba(17,24,32,.46); }
+.project-art::before { inset: 13% 20% 17% 9%; transform: skewY(-6deg); }
+.project-art::after { width: 34%; height: 46%; right: 9%; top: 18%; border-color: rgba(27,108,242,.75); transform: skewY(8deg); }
+.project-art .p-circle { position:absolute; width: 120px; height: 120px; border: 1px solid rgba(27,108,242,.55); border-radius: 50%; right: 20%; bottom: 14%; }
+.project-art .p-grid { position:absolute; inset: 0; opacity:.5; background-image: linear-gradient(to right, rgba(35,62,91,.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(35,62,91,.08) 1px, transparent 1px); background-size: 24px 24px; }
+.project-art .p-code { position:absolute; left: 14px; top: 14px; font-size: 9px; letter-spacing:.16em; color: var(--muted); }
+.project-card:nth-child(even) .project-art { background: linear-gradient(135deg,#111820,#334150); }
+.project-card:nth-child(even) .project-art::before { border-color: rgba(255,255,255,.56); }
+.project-card:nth-child(even) .project-art .p-grid { opacity: .12; }
+.project-card:nth-child(even) .project-art .p-code { color: rgba(255,255,255,.6); }
+.project-info { position:absolute; bottom:0; left:0; right:0; background: rgba(255,255,255,.94); backdrop-filter: blur(10px); border-top:1px solid var(--line); padding: 17px 18px 18px; display:grid; grid-template-columns: 1fr auto; gap: 12px; }
+.project-info h3 { margin: 0 0 7px; font-size: 18px; letter-spacing:-.02em; }
+.project-info p { margin:0; color:var(--muted); font-size:10px; text-transform:uppercase; letter-spacing:.08em; }
+.project-info b { font-size: 17px; color: var(--blue); }
+
+.split-section { display: grid; grid-template-columns: 38% 1fr; gap: 80px; align-items:start; }
+.split-section .section-heading { display:block; position: sticky; top: 130px; margin: 0; }
+.split-section .section-heading p { margin-top:24px; }
+.learn-list { border-top: 1px solid var(--line); }
+.learn-item { display:grid; grid-template-columns: 66px 1fr auto; align-items:center; gap:20px; padding: 26px 4px; border-bottom:1px solid var(--line); transition: padding .2s ease, background .2s; }
+.learn-item:hover { padding-left: 14px; padding-right: 14px; background: rgba(255,255,255,.62); }
+html[dir="rtl"] .learn-item:hover { padding-left: 14px; padding-right: 14px; }
+.learn-index { font-size:10px; color:var(--blue); font-weight:700; }
+.learn-item h3 { margin:0 0 7px; font-size:20px; }
+.learn-item p { margin:0; color:var(--muted); font-size:12px; }
+.learn-meta { display:flex; align-items:center; gap:12px; color:var(--muted); font-size:9px; text-transform:uppercase; letter-spacing:.1em; }
+.learn-meta i { width:32px; height:32px; display:grid; place-items:center; border:1px solid var(--line); border-radius:50%; font-style:normal; color:var(--ink); }
+
+.tool-feature { display:grid; grid-template-columns: 1.15fr .85fr; border:1px solid var(--line); background:var(--paper); min-height:540px; }
+.tool-visual { padding: 46px; display:grid; place-items:center; background: #eef3f9; border-right:1px solid var(--line); position:relative; overflow:hidden; }
+.tool-visual::before { content:""; position:absolute; inset:0; background-image: linear-gradient(to right, rgba(27,108,242,.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(27,108,242,.08) 1px, transparent 1px); background-size:32px 32px; }
+.tool-terminal { position:relative; z-index:2; width:min(630px,100%); background:#111820; color:#e8edf3; box-shadow:0 30px 75px rgba(10,25,45,.18); }
+.terminal-top { height:42px; display:flex; align-items:center; gap:7px; border-bottom:1px solid #303b48; padding:0 14px; }
+.terminal-top i { width:8px; height:8px; border-radius:50%; background:#65707d; }
+.terminal-top span { margin-left:auto; color:#778291; font-size:9px; }
+.terminal-body { padding: 28px; font-family: ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; line-height:1.85; }
+.terminal-body p { margin:4px 0; }
+.terminal-body .prompt { color:#66a4ff; }.terminal-body .muted{color:#7f8a98}.terminal-body .ok{color:#83e6b5;margin-top:18px}.terminal-body strong{color:#fff}
+.tool-copy { padding: 54px; display:flex; flex-direction:column; justify-content:center; }
+.product-badge { display:inline-flex; width:max-content; padding:7px 10px; background:var(--blue-soft); color:var(--blue); font-size:9px; font-weight:800; letter-spacing:.12em; }
+.tool-copy h3 { font-size:48px; margin:20px 0 18px; letter-spacing:-.045em; }
+.tool-copy > p { color:var(--muted); line-height:1.9; font-size:13px; }
+.tool-copy ul { list-style:none; padding:0; margin:23px 0; border-top:1px solid var(--line); }
+.tool-copy li { border-bottom:1px solid var(--line); padding:10px 0; font-size:11px; }
+.tool-actions { display:flex; gap:18px; align-items:center; flex-wrap:wrap; margin-top:10px; }
+.text-link { font-size:10px; font-weight:700; color:var(--blue); }
+.future-tools { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:18px; }
+.future-tools article { border:1px solid var(--line); padding:26px; background:rgba(255,255,255,.65); min-height:190px; }
+.future-tools article > span { font-size:9px; color:var(--blue); }.future-tools h4{font-size:22px;margin:36px 0 8px}.future-tools p{color:var(--muted);font-size:11px}.future-tools small{display:inline-block;margin-top:12px;color:#9aa5b2;font-size:9px;text-transform:uppercase;letter-spacing:.12em}
+
+.about-section { display:grid; grid-template-columns: 120px 1fr 420px; gap:70px; align-items:center; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.about-index { align-self:start; font-size:110px; line-height:.8; color:#d9e0e8; font-weight:700; letter-spacing:-.08em; }
+.about-copy h2 { max-width:760px; }
+.about-copy p { max-width:720px; margin-top:24px; }
+.about-tags { display:flex; gap:7px; flex-wrap:wrap; margin-top:30px; }.about-tags span{border:1px solid var(--line);padding:7px 10px;background:rgba(255,255,255,.7);font-size:9px}
+.about-diagram { height:420px; position:relative; }
+.diagram-ring { position:absolute; border:1px solid var(--blue); border-radius:50%; }.ring-a{width:300px;height:300px;right:0;top:40px}.ring-b{width:205px;height:205px;right:96px;top:115px;border-color:var(--ink)}
+.diagram-line{position:absolute;background:var(--line)}.line-a{width:1px;top:0;bottom:0;right:150px}.line-b{height:1px;left:0;right:0;top:210px}.diagram-label{position:absolute;font-size:9px;letter-spacing:.15em;color:var(--muted)}.dl1{top:32px;right:16px}.dl2{top:198px;left:10px}.dl3{bottom:34px;right:110px;color:var(--blue)}
+
+.contact-section { padding-bottom:140px; }
+.contact-card { display:grid; grid-template-columns: 1.25fr .75fr; gap:70px; align-items:end; background:var(--ink); color:#fff; padding:64px; position:relative; overflow:hidden; }
+.contact-card::before { content:""; position:absolute; width:420px; height:420px; border:1px solid rgba(83,153,255,.35); border-radius:50%; right:-150px; top:-180px; }
+.contact-card .eyebrow{color:#7bb1ff}.contact-card p{color:#a9b2bd;margin-top:22px;max-width:730px}.contact-link{position:relative;z-index:2;border-bottom:1px solid #5b6672;padding:18px 0;display:flex;justify-content:space-between;font-size:15px}.contact-link b{color:#7bb1ff;font-size:22px}
+.site-footer { min-height:120px; border-top:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; color:var(--muted); font-size:10px; }.footer-brand{display:flex;gap:14px;align-items:center}.footer-brand strong{color:var(--ink);font-size:11px}.footer-meta{display:flex;gap:30px}
+
+.modal { position:fixed; inset:0; z-index:100; display:none; }.modal.open{display:block}.modal-backdrop{position:absolute;inset:0;border:0;background:rgba(9,15,24,.72);backdrop-filter:blur(10px);cursor:default}.modal-panel{position:absolute;top:4vh;bottom:4vh;right:4vw;width:min(740px,92vw);background:var(--paper);overflow:auto;box-shadow:0 30px 90px rgba(0,0,0,.22);padding:58px}.modal-close{position:sticky;z-index:3;top:0;float:right;width:38px;height:38px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:23px}.modal-project-art{height:330px;background:#eef3f8;position:relative;overflow:hidden;margin-bottom:30px;border:1px solid var(--line)}.modal-project-art::before{content:"";position:absolute;inset:15% 10% 12% 20%;border:1px solid var(--blue);transform:skewY(-5deg)}.modal-project-art::after{content:"";position:absolute;width:140px;height:140px;border:1px solid var(--ink);border-radius:50%;left:12%;bottom:8%}.modal-panel h3{font-size:45px;letter-spacing:-.04em;margin:12px 0}.modal-panel .modal-meta{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.08em}.modal-panel .modal-description{font-size:13px;line-height:1.9;color:var(--muted);margin-top:25px}.modal-tool-header{padding-top:35px}.modal-tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:35px}.modal-tool-grid>div{border:1px solid var(--line);padding:20px}.modal-tool-grid span{display:block;color:var(--blue);font-size:9px;margin-bottom:30px}.modal-tool-grid strong{font-size:18px}.modal-tool-grid p,.modal-note p{color:var(--muted);font-size:11px;line-height:1.7}.modal-note{margin-top:12px;background:var(--blue-soft);padding:22px;border-left:3px solid var(--blue)}
+
+.reveal { opacity:0; transform:translateY(20px); transition:opacity .7s ease,transform .7s ease; }.reveal.in{opacity:1;transform:none}.project-card{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease,box-shadow .25s ease}.project-card.in{opacity:1;transform:none}
+
+
+/* Persian-first typography */
+html[dir="rtl"] .hero-copy h1,
+html[dir="rtl"] .section-heading h2,
+html[dir="rtl"] .about-copy h2,
+html[dir="rtl"] .contact-card h2,
+html[dir="rtl"] .tool-copy h3,
+html[dir="rtl"] .modal-panel h3 { letter-spacing: 0; line-height: 1.2; }
+html[dir="rtl"] .hero-kicker,
+html[dir="rtl"] .eyebrow { letter-spacing: .02em; text-transform: none; }
+html[dir="rtl"] .main-nav a { font-size: 13px; }
+html[dir="rtl"] .hero-copy p,
+html[dir="rtl"] .section-heading p,
+html[dir="rtl"] .about-copy p,
+html[dir="rtl"] .contact-card p { line-height: 2; }
+html[dir="rtl"] .project-info,
+html[dir="rtl"] .learn-item,
+html[dir="rtl"] .tool-copy,
+html[dir="rtl"] .about-copy,
+html[dir="rtl"] .contact-card { text-align: right; }
+
+html[dir="rtl"] .board-label { left:auto; right:18px; }
+html[dir="rtl"] .board-caption { direction:ltr; }
+html[dir="rtl"] .tool-visual { border-right:none; border-left:1px solid var(--line); }
+html[dir="rtl"] .modal-panel { right:auto; left:4vw; }
+html[dir="rtl"] .modal-close { float:left; }
+html[dir="rtl"] .terminal-top span { margin-left:0; margin-right:auto; }
+html[dir="rtl"] .terminal-body { direction:ltr; text-align:left; }
+
+@media (max-width: 1050px) {
+  :root { --shell: min(100% - 36px, 1200px); }
+  .main-nav { display:none; }.menu-toggle{display:grid}.header-actions,.brand{min-width:auto}
+  .hero-grid{grid-template-columns:1fr;gap:45px}.hero-board{max-width:720px;width:100%}.hero{min-height:auto;padding-bottom:70px}
+  .hero-meta{grid-template-columns:1fr 1fr}.hero-meta div:nth-child(2){border-right:none}.hero-meta div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .section-heading{grid-template-columns:1fr;gap:18px}.split-section{grid-template-columns:1fr;gap:42px}.split-section .section-heading{position:static}
+  .project-card,.project-card:nth-child(n){grid-column:span 6;min-height:400px}.project-card:nth-child(5n+5){grid-column:span 12}
+  .tool-feature{grid-template-columns:1fr}.tool-visual{border-right:none;border-bottom:1px solid var(--line)}html[dir="rtl"] .tool-visual{border-left:none}
+  .about-section{grid-template-columns:80px 1fr}.about-diagram{grid-column:2;height:340px;max-width:440px}.about-index{font-size:78px}
+  .contact-card{grid-template-columns:1fr;gap:35px}
+}
+@media (max-width: 700px) {
+  :root{--shell:calc(100vw - 24px)}.section{padding:82px 0}.site-header{height:68px}.brand-copy small{display:none}.brand-mark{width:32px;height:32px}
+  .hero{padding-top:34px}.hero-grid{margin-top:34px}.hero-copy h1{font-size:52px}.hero-copy p{font-size:13px}.hero-board{aspect-ratio:1}.hero-meta{grid-template-columns:1fr}.hero-meta div{border-right:none!important;border-bottom:1px solid var(--line)}.hero-meta div:last-child{border-bottom:none}
+  .section-heading h2,.about-copy h2,.contact-card h2{font-size:42px}.work-grid{gap:12px}.project-card,.project-card:nth-child(n){grid-column:span 12;min-height:390px}
+  .learn-item{grid-template-columns:42px 1fr}.learn-meta{grid-column:2;justify-content:flex-start}.tool-visual{padding:22px}.tool-copy{padding:32px}.tool-copy h3{font-size:38px}.future-tools{grid-template-columns:1fr}.about-section{grid-template-columns:1fr;gap:35px}.about-index{font-size:65px}.about-diagram{grid-column:auto;width:100%;height:300px}.contact-card{padding:36px 28px}.site-footer{align-items:flex-start;flex-direction:column;justify-content:center;gap:18px}.footer-brand{flex-direction:column;align-items:flex-start;gap:5px}.modal-panel{top:2vh;bottom:2vh;right:2vw!important;left:2vw!important;width:auto;padding:28px}.modal-tool-grid{grid-template-columns:1fr}.modal-project-art{height:250px}.modal-panel h3{font-size:34px}.cursor-dot{display:none}
+}
+
+:root{--accent:#1267e8;--accent2:#74a8ff;--success:#17845b;--danger:#b93434;--warn:#b46b11}
+.account-pill{height:36px;border:1px solid var(--line);background:#fff;padding:0 13px;display:flex;align-items:center;gap:7px;cursor:pointer;font:inherit;font-size:11px;font-weight:700;white-space:nowrap}.account-pill:hover{border-color:var(--accent);color:var(--accent)}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}.product-card{background:#fff;border:1px solid var(--line);padding:24px;min-height:330px;display:flex;flex-direction:column;position:relative;transition:.25s ease}.product-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:#c4d8f8}.product-card .product-head{display:flex;justify-content:space-between;align-items:flex-start;gap:15px}.software-badge,.status-badge{font-size:10px;font-weight:700;padding:6px 8px;border:1px solid var(--line);background:#f7f9fc}.status-badge.free{color:var(--success);border-color:#bde1d2}.status-badge.beta{color:var(--accent);border-color:#c5d8fb}.status-badge.coming{color:#7a8390}.product-card h3{font-size:24px;margin:28px 0 8px}.product-version{font:600 10px/1.3 'DM Sans',sans-serif;color:var(--muted);letter-spacing:.08em}.product-card p{color:var(--muted);line-height:1.9;font-size:13px}.product-card footer{margin-top:auto;border-top:1px solid var(--line);padding-top:18px;display:flex;align-items:center;justify-content:space-between;gap:12px}.price{font-weight:800;font-size:14px}.product-open{border:0;background:var(--ink);color:#fff;padding:10px 13px;cursor:pointer;font-size:11px}.product-open:hover{background:var(--accent)}
+.store-toolbar{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-top:24px}.category-scroll{display:flex;gap:8px;overflow:auto;padding-bottom:4px}.category-btn{border:1px solid var(--line);background:#fff;padding:9px 12px;white-space:nowrap;font-size:11px;cursor:pointer}.category-btn.active{background:var(--ink);border-color:var(--ink);color:#fff}.store-note{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:8px;white-space:nowrap}.live-dot{width:7px;height:7px;background:var(--success);border-radius:50%;box-shadow:0 0 0 4px #e3f3ec}
+.auth-panel{max-width:620px}.auth-head h3,.checkout-panel h3{font-size:34px;margin:9px 0}.auth-head p{color:var(--muted);line-height:1.8}.auth-tabs{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);margin:24px 0}.auth-tabs button{border:0;background:#fff;padding:13px;cursor:pointer;font:inherit;font-size:12px}.auth-tabs button.active{background:var(--ink);color:#fff}.auth-form{display:grid;gap:15px}.auth-form.hidden{display:none}.auth-form label{display:grid;gap:7px;font-size:11px;font-weight:700}.auth-form input,.auth-form textarea,.auth-form select{width:100%;border:1px solid var(--line);background:#fff;padding:12px;font:inherit;font-size:13px;outline:none}.auth-form input:focus,.auth-form textarea:focus,.auth-form select:focus{border-color:var(--accent);box-shadow:0 0 0 3px #eaf2ff}.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.form-message{min-height:20px;font-size:11px;color:var(--danger);margin:0}.form-message.ok{color:var(--success)}.demo-admin{margin-top:22px;padding:12px;background:#f6f8fb;border-right:2px solid var(--accent);font-size:10px;display:flex;gap:7px;flex-wrap:wrap;color:var(--muted)}
+.dashboard-modal .modal-backdrop{background:rgba(9,15,25,.58)}.dashboard-shell{position:relative;z-index:2;width:min(1180px,94vw);height:min(780px,92vh);background:#f9fafc;overflow:hidden;box-shadow:0 30px 90px rgba(5,12,25,.28)}.dashboard-top{height:90px;background:#fff;border-bottom:1px solid var(--line);padding:20px 28px;display:flex;justify-content:space-between;align-items:center}.dashboard-top h3{margin:5px 0 0;font-size:24px}.dashboard-actions{display:flex;align-items:center;gap:8px}.mini-btn{border:1px solid var(--line);background:#fff;padding:9px 11px;cursor:pointer;font:inherit;font-size:10px;font-weight:700}.mini-btn:hover{border-color:var(--accent);color:var(--accent)}.mini-btn.danger:hover{border-color:var(--danger);color:var(--danger)}.inline-close{position:static!important;width:36px!important;height:36px!important}.dashboard-grid{display:grid;grid-template-columns:210px 1fr;height:calc(100% - 90px)}.dashboard-nav{background:#fff;border-left:1px solid var(--line);padding:18px;display:grid;align-content:start;gap:6px}.dashboard-nav button{border:0;background:transparent;text-align:right;padding:11px 12px;font:inherit;font-size:11px;cursor:pointer;color:#4d5967}.dashboard-nav button.active{background:var(--ink);color:#fff}.dashboard-content{padding:26px;overflow:auto}.dash-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.dash-card{background:#fff;border:1px solid var(--line);padding:18px}.dash-card span{font-size:10px;color:var(--muted)}.dash-card strong{display:block;font-size:24px;margin-top:8px}.dash-section{margin-top:22px;background:#fff;border:1px solid var(--line);padding:20px}.dash-section h4{margin:0 0 15px;font-size:15px}.dash-list{display:grid;gap:8px}.dash-row{display:grid;grid-template-columns:1.4fr .8fr .8fr auto;align-items:center;gap:12px;border-top:1px solid #edf0f3;padding:12px 0;font-size:11px}.dash-row:first-child{border-top:0}.dash-row small{color:var(--muted)}.pill{display:inline-flex;padding:5px 8px;font-size:9px;border:1px solid var(--line);font-weight:700}.pill.pending{color:var(--warn);border-color:#ecd4ae;background:#fff8ed}.pill.paid{color:var(--success);border-color:#c7e5d7;background:#f2fbf7}.pill.free{color:var(--accent);border-color:#c5d8fb;background:#f4f8ff}.download-btn,.row-action{border:1px solid var(--ink);background:var(--ink);color:#fff;padding:7px 9px;font:inherit;font-size:9px;cursor:pointer}.row-action.secondary{background:#fff;color:var(--ink);border-color:var(--line)}.empty-state{padding:35px;text-align:center;color:var(--muted);border:1px dashed #ccd4dd;background:#fff}.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.profile-field{background:#fff;border:1px solid var(--line);padding:16px}.profile-field small{display:block;color:var(--muted);margin-bottom:6px}.profile-field strong{font-size:13px}
+.product-modal-panel{max-width:900px}.product-hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px}.product-visual{min-height:300px;background:#101823;color:#fff;padding:24px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}.product-visual:after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:30px 30px}.product-visual strong{font-size:32px;position:relative;z-index:1}.product-visual small{position:relative;z-index:1;color:#aebbd0}.product-detail h3{font-size:35px;margin:8px 0}.product-detail p{color:var(--muted);line-height:1.9}.feature-list{display:grid;gap:8px;padding:0;list-style:none}.feature-list li{border-bottom:1px solid var(--line);padding:9px 0;font-size:11px}.product-buy-box{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}.product-buy-box .price{font-size:18px}
+.checkout-panel{max-width:640px}.payment-methods{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}.payment-card{border:1px solid var(--line);background:#fff;padding:14px;text-align:right;display:grid;gap:5px;cursor:pointer;font:inherit}.payment-card.active{border-color:var(--accent);box-shadow:0 0 0 2px #eaf2ff}.payment-card span{font-size:10px;color:var(--muted)}.payment-card.disabled{opacity:.48;cursor:not-allowed}.bank-box{background:#f6f8fb;border:1px solid var(--line);padding:16px;display:grid;gap:7px}.bank-box span,.bank-box small{font-size:10px;color:var(--muted)}.bank-box strong{font:700 18px/1.2 'DM Sans',sans-serif;direction:ltr;text-align:left;letter-spacing:.06em}
+.admin-shell{width:min(1320px,96vw)}.admin-grid-form{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.admin-grid-form .wide{grid-column:1/-1}.admin-grid-form label{display:grid;gap:5px;font-size:10px;font-weight:700}.admin-grid-form input,.admin-grid-form textarea,.admin-grid-form select{border:1px solid var(--line);padding:10px;font:inherit;font-size:11px}.admin-table{width:100%;border-collapse:collapse;font-size:10px;background:#fff}.admin-table th,.admin-table td{padding:10px;border-bottom:1px solid var(--line);text-align:right;vertical-align:middle}.admin-table th{color:var(--muted);font-weight:600}.admin-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:15px}.admin-toolbar h4{margin:0}.admin-two-col{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}.toast-stack{position:fixed;left:22px;bottom:22px;z-index:1000;display:grid;gap:8px}.toast{background:#111820;color:#fff;padding:12px 14px;min-width:230px;box-shadow:0 12px 35px rgba(0,0,0,.2);font-size:11px;animation:toastIn .2s ease}.toast.ok{border-right:3px solid #35c98b}.toast.warn{border-right:3px solid #f0a340}@keyframes toastIn{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}
+@media(max-width:1000px){.products-grid{grid-template-columns:1fr 1fr}.dashboard-grid{grid-template-columns:170px 1fr}.dash-cards{grid-template-columns:1fr 1fr}.product-hero{grid-template-columns:1fr}.admin-two-col{grid-template-columns:1fr}}
+@media(max-width:720px){.account-pill #accountLabel{display:none}.account-pill{width:36px;padding:0;justify-content:center}.products-grid{grid-template-columns:1fr}.store-toolbar{align-items:flex-start;flex-direction:column}.store-note{white-space:normal}.field-row,.profile-grid,.payment-methods,.admin-grid-form{grid-template-columns:1fr}.dashboard-shell{width:100vw;height:100vh}.dashboard-top{height:auto;min-height:80px;padding:15px}.dashboard-top h3{font-size:18px}.dashboard-grid{grid-template-columns:1fr;height:calc(100% - 80px)}.dashboard-nav{display:flex;overflow:auto;border-left:0;border-bottom:1px solid var(--line);padding:8px;gap:4px}.dashboard-nav button{white-space:nowrap}.dashboard-content{padding:14px}.dash-cards{grid-template-columns:1fr 1fr}.dash-row{grid-template-columns:1fr auto}.dash-row>*:nth-child(2),.dash-row>*:nth-child(3){display:none}.admin-two-col{grid-template-columns:1fr}.admin-table{min-width:760px}.admin-table-wrap{overflow:auto}.product-hero{grid-template-columns:1fr}.product-visual{min-height:220px}}
+
+.setup-banner{position:sticky;top:0;z-index:2000;display:flex;gap:12px;align-items:center;justify-content:center;padding:10px 18px;background:#fff3cd;border-bottom:1px solid #e2ca78;color:#42370c;font-size:13px}.setup-banner code{direction:ltr;background:#fff;padding:2px 6px;border:1px solid #eadba5;border-radius:4px}.auth-mode{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:4px;border:1px solid var(--line,#dfe4ea);border-radius:10px}.auth-mode button{border:0;background:transparent;padding:9px;border-radius:7px;cursor:pointer;font:inherit}.auth-mode button.active{background:#123f75;color:white}.form-help{line-height:1.8;color:#667085}.sync-state{display:inline-flex;gap:7px;align-items:center;font-size:12px;color:#667085}.sync-dot{width:7px;height:7px;border-radius:50%;background:#18a36a}.sync-dot.offline{background:#d99b2b}.admin-upload{display:grid;gap:8px;padding:12px;border:1px dashed #bdc6d1;background:#fbfcfd}.receipt-thumb{width:64px;height:48px;object-fit:cover;border:1px solid #dfe4ea;border-radius:4px}.setup-card{padding:20px;border:1px solid #dfe4ea;background:#fff}.setup-card ol{line-height:2}.status-paid{color:#187c55}.status-pending{color:#ad7600}.status-rejected{color:#a63c3c}.danger-zone{border-color:#e4b5b5;background:#fffafa}
+
+</style>
+</head>
+<body>
+  <div class="setup-banner" id="setupBanner" hidden><strong>Backend هنوز تنظیم نشده است.</strong><span>فایل <code>assets/config.js</code> را با URL و Anon Key پروژه Supabase تکمیل کن. تا آن زمان سایت در حالت Preview است.</span></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="site-grid" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="site-header" id="top">
+    <a class="brand" href="#top" aria-label="صفحه اصلی صدف علیزاده">
+      <span class="brand-mark">SA</span>
+      <span class="brand-copy"><strong>Sadaf Alizadeh</strong><small>@sadafalizadeh_arch</small></span>
+    </a>
+    <nav class="main-nav" aria-label="منوی اصلی">
+      <a href="#work" data-i18n="nav.work">نمونه‌کارها</a>
+      <a href="#learn" data-i18n="nav.learn">آموزش</a>
+      <a href="#tools" data-i18n="nav.tools">ابزارها</a>
+      <a href="#about" data-i18n="nav.about">درباره من</a>
+      <a href="#contact" data-i18n="nav.contact">تماس</a>
+    </nav>
+    <div class="header-actions">
+      <button class="account-pill" id="accountButton" type="button"><span id="accountIcon">◌</span><span id="accountLabel">ورود / عضویت</span></button>
+      <button class="lang-toggle" id="langToggle" type="button" aria-label="تغییر زبان">EN</button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="باز کردن منو"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero section-shell">
+      <div class="hero-kicker reveal"><span class="dot"></span><span data-i18n="hero.kicker">معماری · تجسم معماری · آموزش · ابزارهای دیجیتال</span></div>
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <h1><span data-i18n="hero.line1">طراحی فضا.</span><em data-i18n="hero.line2">ساختن ورک‌فلو.</em></h1>
+          <p data-i18n="hero.body">پروژه‌های معماری، آموزش‌های کاربردی و ابزارهایی که از نیاز واقعی کار حرفه‌ای ساخته می‌شوند.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#work"><span data-i18n="hero.ctaWork">مشاهده نمونه‌کارها</span><span>↗</span></a>
+            <a class="btn btn-ghost" href="#tools"><span data-i18n="hero.ctaTools">فروشگاه ابزارها</span><span>→</span></a>
+          </div>
+        </div>
+        <div class="hero-board reveal" aria-label="Architectural identity board">
+          <div class="board-label">SADAF / PLATFORM 04</div>
+          <div class="board-axes"><div class="axis axis-x"></div><div class="axis axis-y"></div></div>
+          <div class="board-shape shape-a"></div><div class="board-shape shape-b"></div><div class="board-shape shape-c"></div>
+          <svg class="board-sketch" viewBox="0 0 600 420" aria-hidden="true"><path d="M40 300 C140 242 190 340 290 265 S455 170 555 230"/><path d="M65 335 L205 210 L344 302 L522 118"/><circle cx="432" cy="116" r="54"/><rect x="128" y="85" width="114" height="80" rx="2"/></svg>
+          <div class="board-caption"><span>PORTFOLIO / LEARN / TOOLS</span><span>2026</span></div>
+        </div>
+      </div>
+      <div class="hero-meta reveal">
+        <div><strong>01</strong><span>پروژه‌های معماری</span></div><div><strong>02</strong><span>تجسم و CGI</span></div><div><strong>03</strong><span>آموزش</span></div><div><strong>04</strong><span>ابزار و پلاگین</span></div>
+      </div>
+    </section>
+
+    <section class="marquee" aria-label="Specialties"><div class="marquee-track"><span>ARCHITECTURE</span><b>✦</b><span>CGI</span><b>✦</b><span>AUTOCAD</span><b>✦</b><span>3DS MAX</span><b>✦</b><span>D5 RENDER</span><b>✦</b><span>LUMION</span><b>✦</b><span>AI TOOLS</span><b>✦</b><span>ARCHITECTURE</span><b>✦</b><span>CGI</span><b>✦</b><span>AUTOCAD</span></div></section>
+
+    <section class="section-shell section" id="work">
+      <div class="section-heading reveal"><div><span class="eyebrow">01 / PORTFOLIO</span><h2 data-i18n="work.title">پروژه‌های منتخب</h2></div><p data-i18n="work.body">پروژه‌ها از دیتابیس واقعی خوانده می‌شوند و از پنل مدیریت قابل انتشار و ویرایش هستند.</p></div>
+      <div class="filters reveal" id="workFilters"></div><div class="work-grid" id="workGrid"></div>
+    </section>
+
+    <section class="section-shell section split-section" id="learn">
+      <div class="section-heading sticky-heading reveal"><div><span class="eyebrow">02 / LEARN</span><h2 data-i18n="learn.title">آموزش‌ها</h2></div><p data-i18n="learn.body">آموزش‌های کوتاه و اجرایی برای معماری، رندر و ابزارهای دیجیتال.</p></div>
+      <div class="learn-list" id="learnList"></div>
+    </section>
+
+    <section class="section-shell section" id="tools">
+      <div class="section-heading reveal"><div><span class="eyebrow">03 / STORE</span><h2 data-i18n="tools.title">فروشگاه ابزارها</h2></div><p data-i18n="tools.body">اسکریپت، پلاگین، پریست و ابزار برای نرم‌افزارهای مختلف؛ رایگان یا پولی.</p></div>
+      <div class="store-toolbar reveal"><div class="category-scroll" id="toolCategories"></div><div class="store-note"><span class="live-dot"></span><span>خریدها و دانلودها به حساب واقعی کاربر متصل می‌شوند</span></div></div>
+      <div class="products-grid" id="productsGrid"></div>
+    </section>
+
+    <section class="section-shell section about-section" id="about">
+      <div class="about-index reveal">04</div><div class="about-copy reveal"><span class="eyebrow">ABOUT / SADAF</span><h2>معماری با نگاه سیستمی.</h2><p>این پلتفرم سه بخش از مسیر کاری من را کنار هم می‌آورد: پروژه‌ها، آموزش و ابزارهایی که از نیاز واقعی پروژه ساخته می‌شوند.</p><div class="about-tags"><span>AutoCAD</span><span>3ds Max</span><span>Corona</span><span>D5 Render</span><span>Lumion</span><span>Photoshop</span><span>AI</span></div></div>
+      <div class="about-diagram reveal" aria-hidden="true"><div class="diagram-ring ring-a"></div><div class="diagram-ring ring-b"></div><div class="diagram-line line-a"></div><div class="diagram-line line-b"></div><span class="diagram-label dl1">DESIGN</span><span class="diagram-label dl2">CG</span><span class="diagram-label dl3">TOOLS</span></div>
+    </section>
+
+    <section class="section-shell section contact-section" id="contact"><div class="contact-card reveal"><div><span class="eyebrow">05 / CONTACT</span><h2>پروژه، همکاری یا ایده‌ای برای ابزار داری؟</h2><p>برای درخواست پروژه یا همکاری می‌توانی از اینستاگرام در تماس باشی. فرم حرفه‌ای درخواست پروژه در فاز آنلاین اضافه می‌شود.</p></div><a class="contact-link" href="https://www.instagram.com/sadafalizadeh_arch/" target="_blank" rel="noreferrer"><span>@sadafalizadeh_arch</span><b>↗</b></a></div></section>
+  </main>
+
+  <footer class="site-footer section-shell"><div class="footer-brand"><strong>Sadaf Alizadeh</strong><span>Architecture · Education · Digital Tools</span></div><div class="footer-meta"><span>© 2026</span><a href="#top">بالا ↑</a></div></footer>
+
+  <!-- AUTH -->
+  <div class="modal" id="authModal" aria-hidden="true"><button class="modal-backdrop" data-close-modal aria-label="بستن"></button><article class="modal-panel auth-panel"><button class="modal-close" data-close-modal>×</button><div class="auth-head"><span class="eyebrow">ACCOUNT</span><h3>ورود یا عضویت</h3><p>خریدها، دانلودها و لایسنس‌ها به حساب شما متصل می‌شوند.</p></div><div class="auth-tabs"><button class="active" data-auth-tab="login">ورود</button><button data-auth-tab="register">عضویت</button></div>
+    <form id="loginForm" class="auth-form"><label>ایمیل یا شماره موبایل<input name="identity" required placeholder="example@email.com یا 09..." autocomplete="username"></label><label>رمز عبور<input name="password" type="password" required minlength="6" autocomplete="current-password"></label><button class="btn btn-primary" type="submit"><span>ورود امن</span><span>→</span></button><p class="form-message" id="loginMessage"></p></form>
+    <form id="registerForm" class="auth-form hidden"><div class="auth-mode"><button class="active" type="button" data-register-mode="email">ثبت‌نام با ایمیل</button><button type="button" data-register-mode="phone">ثبت‌نام با موبایل</button></div><input type="hidden" name="registerMode" value="email"><label>نام و نام خانوادگی<input name="name" required></label><div class="field-row"><label>شماره موبایل<input name="mobile" inputmode="tel" placeholder="09xxxxxxxxx"></label><label>ایمیل<input name="email" type="email" placeholder="example@email.com"></label></div><label>رمز عبور<input name="password" type="password" required minlength="8"></label><button class="btn btn-primary" type="submit"><span>ساخت حساب</span><span>+</span></button><p class="form-message" id="registerMessage"></p><small class="form-help">برای ثبت‌نام با موبایل، سرویس SMS باید در Backend فعال باشد. ایمیل و موبایل هر دو در پروفایل قابل نگهداری‌اند.</small></form>
+    <div class="demo-admin"><strong>Backend واقعی:</strong><span>این نسخه به Supabase Auth و دیتابیس امن متصل می‌شود.</span></div></article></div>
+
+  <!-- ACCOUNT DASHBOARD -->
+  <div class="modal dashboard-modal" id="dashboardModal" aria-hidden="true"><button class="modal-backdrop" data-close-modal></button><article class="dashboard-shell"><div class="dashboard-top"><div><span class="eyebrow">MY ACCOUNT</span><h3 id="dashboardTitle">حساب کاربری</h3></div><div class="dashboard-actions"><button class="mini-btn" id="adminOpenBtn" hidden>پنل مدیریت</button><button class="mini-btn danger" id="logoutBtn">خروج</button><button class="modal-close inline-close" data-close-modal>×</button></div></div><div class="dashboard-grid"><aside class="dashboard-nav"><button class="active" data-dash-tab="overview">نمای کلی</button><button data-dash-tab="downloads">دانلودهای من</button><button data-dash-tab="orders">سفارش‌ها</button><button data-dash-tab="licenses">لایسنس‌ها</button><button data-dash-tab="profile">پروفایل</button></aside><section class="dashboard-content" id="dashboardContent"></section></div></article></div>
+
+  <!-- PRODUCT -->
+  <div class="modal" id="productModal" aria-hidden="true"><button class="modal-backdrop" data-close-modal></button><article class="modal-panel product-modal-panel"><button class="modal-close" data-close-modal>×</button><div id="productModalContent"></div></article></div>
+
+  <!-- CHECKOUT -->
+  <div class="modal" id="checkoutModal" aria-hidden="true"><button class="modal-backdrop" data-close-modal></button><article class="modal-panel checkout-panel"><button class="modal-close" data-close-modal>×</button><span class="eyebrow">CHECKOUT</span><h3>ثبت سفارش</h3><div id="checkoutSummary"></div><div class="payment-methods"><button class="payment-card active" data-pay-method="card"><strong>کارت‌به‌کارت</strong><span>تأیید دستی توسط مدیر</span></button><button class="payment-card disabled" type="button"><strong>درگاه آنلاین</strong><span>در نسخه سرور متصل می‌شود</span></button></div><form id="cardPaymentForm" class="auth-form"><div class="bank-box"><span>اطلاعات کارت‌به‌کارت</span><strong id="bankCardNumber">در حال دریافت از تنظیمات سایت…</strong><small id="bankCardOwner">—</small></div><label>شماره پیگیری / توضیح پرداخت<input name="reference" required placeholder="مثلاً 123456"></label><label>تصویر رسید پرداخت<input name="receipt" type="file" accept="image/*,.pdf" required></label><button class="btn btn-primary" type="submit"><span>ثبت سفارش و رسید</span><span>✓</span></button><p class="form-message" id="paymentMessage"></p></form></article></div>
+
+  <!-- ADMIN -->
+  <div class="modal dashboard-modal" id="adminModal" aria-hidden="true"><button class="modal-backdrop" data-close-modal></button><article class="dashboard-shell admin-shell"><div class="dashboard-top"><div><span class="eyebrow">ADMIN / SADAF</span><h3>پنل مدیریت محتوا و فروش</h3></div><div class="dashboard-actions"><button class="modal-close inline-close" data-close-modal>×</button></div></div><div class="dashboard-grid"><aside class="dashboard-nav"><button class="active" data-admin-tab="overview">داشبورد</button><button data-admin-tab="projects">پروژه‌ها</button><button data-admin-tab="products">محصولات</button><button data-admin-tab="lessons">آموزش‌ها</button><button data-admin-tab="orders">سفارش‌ها</button><button data-admin-tab="users">کاربران</button><button data-admin-tab="settings">تنظیمات</button></aside><section class="dashboard-content" id="adminContent"></section></div></article></div>
+
+  <!-- PROJECT -->
+  <div class="modal" id="projectModal" aria-hidden="true"><button class="modal-backdrop" data-close-modal></button><article class="modal-panel"><button class="modal-close" data-close-modal>×</button><div id="projectModalContent"></div></article></div>
+
+  <div class="toast-stack" id="toastStack"></div>
+<script>window.SADAF_CONFIG={SUPABASE_URL:'',SUPABASE_ANON_KEY:'',SITE_URL:'',DOWNLOAD_URL_TTL_SECONDS:300};</script>
+<script>window.SADAF_SEED = {
+  categories: ['همه','AutoCAD','3ds Max','D5 Render','Lumion','Photoshop','AI Tools','Other'],
+  projects: [
+    {id:'gilana',titleFa:'گیلانا پلازا',titleEn:'GILANA PLAZA',type:'Architecture',typeFa:'معماری',locationFa:'رشت، گیلان',locationEn:'Rasht, Gilan',year:'2026',metaFa:'تجاری · توریستی · گردشگری',metaEn:'Commercial · Tourism · Recreation',descriptionFa:'پروژه‌ای تجاری، توریستی و گردشگری با سازمان‌دهی چندلایه‌ی سایت، مسیرهای عمومی و هویت معماری مشخص.',descriptionEn:'A mixed-use commercial, tourism and recreational project with layered site organization and a strong architectural identity.'},
+    {id:'hamkhaneh',titleFa:'هم‌خانه',titleEn:'HAMKHANEH',type:'Residential',typeFa:'مسکونی',locationFa:'چالوس، مازندران',locationEn:'Chalus, Mazandaran',year:'2026',metaFa:'مسکونی · ۱۰۵ مترمربع',metaEn:'Residential · 105 m²',descriptionFa:'خانه‌ای جمع‌وجور برای زندگی مشترک دو دوست با دو سلیقه‌ی فرمی متفاوت؛ منحنی و خطی.',descriptionEn:'A compact shared home shaped around two different formal preferences: curved and linear.'},
+    {id:'casa',titleFa:'کازا لوزا',titleEn:'CASA LUZA',type:'Residential',typeFa:'مسکونی',locationFa:'ماربیا، اسپانیا',locationEn:'Marbella, Spain',year:'2026',metaFa:'ویلا · ۲۹۰ مترمربع',metaEn:'Villa · 290 m²',descriptionFa:'پروژه‌ای مسکونی معاصر برای یک زوج هنرمند، با تمرکز بر نور طبیعی و حال‌وهوای آرام مدیترانه‌ای.',descriptionEn:'A contemporary residential project for an artist couple with calm Mediterranean atmosphere.'},
+    {id:'hiva',titleFa:'هیوا',titleEn:'HIVA',type:'Interior',typeFa:'طراحی داخلی',locationFa:'تهران',locationEn:'Tehran',year:'2023',metaFa:'اداری · ۱۱۰ مترمربع',metaEn:'Office · 110 m²',descriptionFa:'فضای مدیریتی و پذیرش ویژه با زبان لوکس و باز، استفاده از سنگ تیره و جزئیات فلزی.',descriptionEn:'A refined executive office suite with dark stone and metallic accents.'},
+    {id:'nava',titleFa:'ناوا قشم',titleEn:'NAVA QESHM',type:'Architecture',typeFa:'معماری',locationFa:'قشم',locationEn:'Qeshm',year:'2026',metaFa:'اکو ریزورت · سایت ۹۸۰۰ مترمربع',metaEn:'Eco Resort · 9,800 m² site',descriptionFa:'کانسپت اکو ریزورت با سازمان‌دهی متناسب با اقلیم، فضاهای اقامتی و هویت جزیره‌ای.',descriptionEn:'An eco-resort concept organized around climate-responsive landscape and island identity.'},
+    {id:'mist',titleFa:'کافه میست',titleEn:'MIST CAFÉ',type:'Interior',typeFa:'طراحی داخلی',locationFa:'نوشهر',locationEn:'Nowshahr',year:'2023',metaFa:'کافه · فضای پذیرایی',metaEn:'Hospitality · Café',descriptionFa:'فضایی گرم و آرام با انتقال نرم متریال‌ها و نورپردازی کنترل‌شده.',descriptionEn:'A warm hospitality interior with soft material transitions and controlled lighting.'}
+  ],
+  lessons: [
+    {id:'l1',titleFa:'Batch Plot در AutoCAD',titleEn:'Batch Plot in AutoCAD',subtitleFa:'منطق فایل‌های تولیدی با ده‌ها شیت',subtitleEn:'How to think about 90-sheet production files',tag:'AutoCAD',time:'12 min',status:'published'},
+    {id:'l2',titleFa:'DNA فایل CTB و سلسله‌مراتب Lineweight',titleEn:'CTB DNA & Lineweight Hierarchy',subtitleFa:'ساخت سیستم خوانا برای نقشه‌های سیاه‌وسفید',subtitleEn:'Build a readable black-and-white drawing system',tag:'Standards',time:'18 min',status:'published'},
+    {id:'l3',titleFa:'ورک‌فلو حرفه‌ای D5 Render',titleEn:'D5 Render — Pro Workflow',subtitleFa:'نور، دوربین، انیمیشن و ارائه',subtitleEn:'Lighting, camera, animation and presentation basics',tag:'D5 Render',time:'24 min',status:'published'}
+  ],
+  products: [
+    {id:'sheet-by-sadaf',name:'SHEET by SADAF',slug:'sheet-by-sadaf',category:'AutoCAD',version:'0.1.3',status:'beta',isFree:false,price:490000,priceLabel:'۴۹۰٬۰۰۰ تومان',descriptionFa:'پلات گروهی هوشمند برای فایل‌های سنگین اتوکد؛ تشخیص شیت، CTB متناسب با مقیاس و خروجی PDF جداگانه یا چندصفحه‌ای.',descriptionEn:'Smart batch plotting for large AutoCAD files with sheet detection, scale-aware CTB and PDF publishing.',features:['تشخیص شیت‌های Model Space','پشتیبانی از Layout','پروفایل CTB بر اساس مقیاس','PDF جداگانه یا چندصفحه‌ای'],download:'downloads/SHEET_by_SADAF_Beta_0.1.3_COMPLETE.zip'},
+    {id:'cad-qa-lite',name:'CAD QA Lite',slug:'cad-qa-lite',category:'AutoCAD',version:'0.1',status:'free',isFree:true,price:0,priceLabel:'رایگان',descriptionFa:'نمونه‌ی محصول رایگان برای نمایش منطق دریافت و اضافه‌شدن به دانلودهای حساب کاربری.',descriptionEn:'Free demo tool to show the account library flow.',features:['Free download','Account library','Update-ready'],download:'#'},
+    {id:'d5-scene-check',name:'D5 Scene Check',slug:'d5-scene-check',category:'D5 Render',version:'0.1',status:'coming',isFree:false,price:0,priceLabel:'به‌زودی',descriptionFa:'چک‌لیست و ابزار آماده‌سازی صحنه برای تیم‌های تجسم معماری.',descriptionEn:'Scene preparation checklist for visualization teams.',features:['Scene QA','Camera checklist','Material prep'],download:'#'},
+    {id:'max-render-prep',name:'Render Prep for 3ds Max',slug:'max-render-prep',category:'3ds Max',version:'0.1',status:'coming',isFree:false,price:0,priceLabel:'به‌زودی',descriptionFa:'ابزار برنامه‌ریزی‌شده برای آماده‌سازی و کنترل فایل‌های 3ds Max.',descriptionEn:'Planned preparation and QA tool for 3ds Max scenes.',features:['Scene cleanup','Preflight','Team workflow'],download:'#'}
+  ]
+};
+</script>
+<script>(() => {
+'use strict';
+const cfg=window.SADAF_CONFIG||{};
+const configured=Boolean(cfg.SUPABASE_URL && cfg.SUPABASE_ANON_KEY);
+let sb=null;
+async function ensureSupabase(){if(!configured)return null;if(!window.supabase){await new Promise((resolve,reject)=>{const sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';sc.onload=resolve;sc.onerror=()=>reject(new Error('Supabase library could not load'));document.head.appendChild(sc)})}sb=window.supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_ANON_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});return sb}
+const seed=window.SADAF_SEED||{projects:[],lessons:[],products:[],categories:[]};
+const state={lang:'fa',projectFilter:'All',productCategory:'همه',projects:[],lessons:[],products:[],settings:{},session:null,profile:null,activeProduct:null,activeCheckout:null,dashTab:'overview',adminTab:'overview',adminEdit:{project:null,product:null,lesson:null}};
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+const slugify=s=>String(s||'item').trim().toLowerCase().replace(/[^a-z0-9\u0600-\u06ff]+/g,'-').replace(/^-|-$/g,'')+'-'+Date.now().toString(36).slice(-5);
+const money=n=>new Intl.NumberFormat('fa-IR').format(Number(n||0))+' تومان';
+const fmtDate=x=>x?new Date(x).toLocaleDateString('fa-IR'):'—';
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+function normalizePhone(v){let s=String(v||'').replace(/[\s()-]/g,'');if(s.startsWith('00'))s='+'+s.slice(2);if(s.startsWith('09'))s='+98'+s.slice(1);else if(/^9\d{9}$/.test(s))s='+98'+s;return s}
+function toast(msg,type='ok'){const x=document.createElement('div');x.className=`toast ${type}`;x.textContent=msg;$('#toastStack')?.appendChild(x);setTimeout(()=>x.remove(),3500)}
+function setMsg(sel,msg,type=''){const e=$(sel);if(!e)return;e.textContent=msg;e.className='form-message '+type}
+function openModal(id){const m=$('#'+id);if(!m)return;m.classList.add('open');m.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}
+function closeModals(){ $$('.modal.open').forEach(m=>{m.classList.remove('open');m.setAttribute('aria-hidden','true')});document.body.style.overflow=''; }
+function isAdmin(){return state.profile?.role==='admin'}
+function requireBackend(){if(configured)return true;toast('ابتدا Backend را طبق راهنمای SETUP تنظیم کن.','warn');return false}
+function requireUser(next){if(state.session?.user)return true;state.afterLogin=next||null;openModal('authModal');toast('برای ادامه وارد حساب شوید.','warn');return false}
+
+const tr={fa:{'nav.work':'نمونه‌کارها','nav.learn':'آموزش','nav.tools':'ابزارها','nav.about':'درباره من','nav.contact':'تماس','hero.kicker':'معماری · تجسم معماری · آموزش · ابزارهای دیجیتال','hero.line1':'طراحی فضا.','hero.line2':'ساختن ورک‌فلو.','hero.body':'پروژه‌های معماری، آموزش‌های کاربردی و ابزارهایی که از نیاز واقعی کار حرفه‌ای ساخته می‌شوند.','hero.ctaWork':'مشاهده نمونه‌کارها','hero.ctaTools':'فروشگاه ابزارها','work.title':'پروژه‌های منتخب','work.body':'پروژه‌ها از دیتابیس واقعی خوانده می‌شوند و از پنل مدیریت قابل انتشار و ویرایش هستند.','learn.title':'آموزش‌ها','learn.body':'آموزش‌های کوتاه و اجرایی برای معماری، رندر و ابزارهای دیجیتال.','tools.title':'فروشگاه ابزارها','tools.body':'اسکریپت، پلاگین، پریست و ابزار برای نرم‌افزارهای مختلف؛ رایگان یا پولی.'},en:{'nav.work':'Work','nav.learn':'Learn','nav.tools':'Tools','nav.about':'About','nav.contact':'Contact','hero.kicker':'Architecture · Visualization · Education · Digital Tools','hero.line1':'Design spaces.','hero.line2':'Build workflows.','hero.body':'Architecture projects, practical education and tools built from real production needs.','hero.ctaWork':'Selected work','hero.ctaTools':'Tool store','work.title':'Selected work','work.body':'Projects are loaded from the live database and managed from the admin CMS.','learn.title':'Learn','learn.body':'Practical lessons for architecture, rendering and digital workflows.','tools.title':'Tool Store','tools.body':'Scripts, plugins, presets and utilities for multiple software platforms — free or paid.'}};
+function renderI18n(){document.documentElement.lang=state.lang;document.documentElement.dir=state.lang==='fa'?'rtl':'ltr';$$('[data-i18n]').forEach(el=>el.textContent=tr[state.lang]?.[el.dataset.i18n]||el.textContent);$('#langToggle').textContent=state.lang==='fa'?'EN':'FA';renderProjects();renderLessons();renderProducts();renderAccountButton()}
+
+function normalProject(p){if(p.title_fa!==undefined)return p;return {id:p.id,slug:p.id,title_fa:p.titleFa,title_en:p.titleEn,type:p.type,type_fa:p.typeFa,location_fa:p.locationFa,location_en:p.locationEn,year:p.year,meta_fa:p.metaFa,meta_en:p.metaEn,description_fa:p.descriptionFa,description_en:p.descriptionEn,status:'published',featured:false}}
+function normalLesson(l){if(l.title_fa!==undefined)return l;return {id:l.id,slug:l.id,title_fa:l.titleFa,title_en:l.titleEn,subtitle_fa:l.subtitleFa,subtitle_en:l.subtitleEn,category:l.tag,duration:l.time,status:'published'}}
+function normalProduct(p){if(p.software_category!==undefined)return p;return {id:p.id,slug:p.slug,name:p.name,software_category:p.category,product_type:'script',description_fa:p.descriptionFa,description_en:p.descriptionEn,features_fa:p.features||[],features_en:p.features||[],is_free:p.isFree,price_toman:p.price||0,status:p.status==='free'?'published':p.status==='coming'?'coming_soon':p.status,current_version:p.version}}
+async function loadPublicData(){
+  if(!configured){state.projects=seed.projects.map(normalProject);state.lessons=seed.lessons.map(normalLesson);state.products=seed.products.map(normalProduct);state.settings={bank_card:{number:'',owner:'صدف علیزاده'}};$('#setupBanner').hidden=false;renderAll();return}
+  $('#setupBanner').hidden=true;
+  const [pr,le,po,se]=await Promise.all([
+    sb.from('projects').select('*').order('sort_order').order('created_at',{ascending:false}),
+    sb.from('lessons').select('*').order('sort_order').order('created_at',{ascending:false}),
+    sb.from('products').select('*').order('sort_order').order('created_at',{ascending:false}),
+    sb.from('site_settings').select('key,value').eq('public_read',true)
+  ]);
+  for(const r of [pr,le,po,se]) if(r.error) console.error(r.error);
+  state.projects=(pr.data||[]).map(normalProject);state.lessons=(le.data||[]).map(normalLesson);state.products=(po.data||[]).map(normalProduct);state.settings=Object.fromEntries((se.data||[]).map(x=>[x.key,x.value]));renderAll();
+}
+function renderAll(){renderProjectFilters();renderProjects();renderLessons();renderProductCategories();renderProducts();renderAccountButton()}
+function renderProjectFilters(){const types=[...new Set(state.projects.map(p=>p.type).filter(Boolean))];const labels={All:'همه',Architecture:'معماری',Residential:'مسکونی',Interior:'داخلی'};$('#workFilters').innerHTML=['All',...types].map(v=>`<button class="${state.projectFilter===v?'active':''}" data-pfilter="${esc(v)}">${esc(state.lang==='fa'?(labels[v]||v):v)}</button>`).join('');$$('[data-pfilter]').forEach(b=>b.onclick=()=>{state.projectFilter=b.dataset.pfilter;renderProjectFilters();renderProjects()})}
+function renderProjects(){const rows=state.projects.filter(p=>state.projectFilter==='All'||p.type===state.projectFilter);$('#workGrid').innerHTML=rows.map((p,i)=>{const title=state.lang==='fa'?p.title_fa:(p.title_en||p.title_fa),loc=state.lang==='fa'?p.location_fa:(p.location_en||p.location_fa),meta=state.lang==='fa'?p.meta_fa:(p.meta_en||p.meta_fa);const bg=p.cover_image_url?`style="background-image:url('${esc(p.cover_image_url)}');background-size:cover;background-position:center"`:'';return `<button class="work-card reveal visible" data-project="${esc(p.id)}"><div class="work-visual visual-${(i%6)+1}" ${bg}><span>${String(i+1).padStart(2,'0')}</span></div><div class="work-info"><div><h3>${esc(title)}</h3><p>${esc([loc,p.year,meta].filter(Boolean).join(' · '))}</p></div><b>↗</b></div></button>`}).join('')||'<div class="empty-state">هنوز پروژه‌ای منتشر نشده است.</div>';$$('[data-project]').forEach(b=>b.onclick=()=>openProject(b.dataset.project))}
+function openProject(id){const p=state.projects.find(x=>String(x.id)===String(id));if(!p)return;const title=state.lang==='fa'?p.title_fa:(p.title_en||p.title_fa),desc=state.lang==='fa'?p.description_fa:(p.description_en||p.description_fa),loc=state.lang==='fa'?p.location_fa:(p.location_en||p.location_fa);const gallery=Array.isArray(p.gallery)?p.gallery:[];$('#projectModalContent').innerHTML=`<span class="eyebrow">PROJECT</span><h2>${esc(title)}</h2><p class="modal-lead">${esc([loc,p.year,p.area].filter(Boolean).join(' · '))}</p><p>${esc(desc||'')}</p>${p.cover_image_url?`<img src="${esc(p.cover_image_url)}" alt="" style="width:100%;margin-top:18px">`:''}${gallery.length?`<div class="project-gallery">${gallery.map(x=>`<img src="${esc(x)}" alt="">`).join('')}</div>`:''}`;openModal('projectModal')}
+function renderLessons(){$('#learnList').innerHTML=state.lessons.map((l,i)=>`<article class="learn-item reveal visible"><div class="learn-index">${String(i+1).padStart(2,'0')}</div><div><span>${esc(l.category||'')}</span><h3>${esc(state.lang==='fa'?l.title_fa:(l.title_en||l.title_fa))}</h3><p>${esc(state.lang==='fa'?l.subtitle_fa:(l.subtitle_en||l.subtitle_fa))}</p></div><time>${esc(l.duration||'')}</time></article>`).join('')||'<div class="empty-state">آموزشی منتشر نشده است.</div>'}
+function categories(){return ['همه',...new Set(state.products.map(p=>p.software_category).filter(Boolean))]}
+function renderProductCategories(){const cats=categories();if(!cats.includes(state.productCategory))state.productCategory='همه';$('#toolCategories').innerHTML=cats.map(c=>`<button class="${state.productCategory===c?'active':''}" data-cat="${esc(c)}">${esc(c)}</button>`).join('');$$('[data-cat]').forEach(b=>b.onclick=()=>{state.productCategory=b.dataset.cat;renderProductCategories();renderProducts()})}
+function productStatus(p){if(p.status==='coming_soon')return 'به‌زودی';if(p.status==='beta')return 'BETA';if(p.is_free)return 'رایگان';return p.price_toman>0?money(p.price_toman):'قیمت‌گذاری نشده'}
+function renderProducts(){const rows=state.products.filter(p=>state.productCategory==='همه'||p.software_category===state.productCategory);$('#productsGrid').innerHTML=rows.map(p=>`<article class="product-card reveal visible"><div class="product-top"><span>${esc(p.software_category)}</span><small>${esc(p.current_version?'V'+p.current_version:'')}</small></div><h3>${esc(p.name)}</h3><p>${esc(state.lang==='fa'?p.description_fa:(p.description_en||p.description_fa))}</p><div class="product-bottom"><strong>${esc(productStatus(p))}</strong><button class="row-action" data-product="${esc(p.id)}">جزئیات / دریافت</button></div></article>`).join('')||'<div class="empty-state">محصولی در این دسته وجود ندارد.</div>';$$('[data-product]').forEach(b=>b.onclick=()=>openProduct(b.dataset.product))}
+function openProduct(id){const p=state.products.find(x=>String(x.id)===String(id));if(!p)return;state.activeProduct=p.id;const f=state.lang==='fa'?p.features_fa:p.features_en;const features=Array.isArray(f)?f:[];const disabled=p.status==='coming_soon'||(!p.is_free&&p.price_toman<=0);$('#productModalContent').innerHTML=`<span class="eyebrow">${esc(p.software_category)} / ${esc(p.product_type||'TOOL')}</span><h2>${esc(p.name)}</h2><p class="modal-lead">${esc(state.lang==='fa'?p.description_fa:(p.description_en||p.description_fa))}</p><div class="feature-list">${features.map(x=>`<span>✓ ${esc(x)}</span>`).join('')}</div><div class="product-purchase"><strong>${esc(productStatus(p))}</strong><button class="btn btn-primary" id="purchaseBtn" ${disabled?'disabled':''}>${p.is_free?'دریافت رایگان':'خرید / ثبت سفارش'} →</button></div>`;$('#purchaseBtn')?.addEventListener('click',()=>purchaseProduct(p));openModal('productModal')}
+async function purchaseProduct(p){if(!requireBackend()||!requireUser(()=>purchaseProduct(p)))return;if(p.is_free){const {error}=await sb.rpc('claim_free_product',{p_product_id:p.id});if(error){toast(humanError(error),'warn');return}toast('محصول به دانلودهای شما اضافه شد.');closeModals();await openDashboard('downloads');return}state.activeCheckout=p.id;const bank=state.settings.bank_card||{};$('#bankCardNumber').textContent=bank.number||'شماره کارت هنوز در تنظیمات ثبت نشده';$('#bankCardOwner').textContent=bank.owner||'';$('#checkoutSummary').innerHTML=`<div class="checkout-product"><strong>${esc(p.name)}</strong><span>${esc(money(p.price_toman))}</span></div>`;closeModals();await sleep(50);openModal('checkoutModal')}
+
+async function loadSession(){if(!configured){renderAccountButton();return}const {data:{session}}=await sb.auth.getSession();state.session=session;await loadProfile();renderAccountButton()}
+async function loadProfile(){state.profile=null;if(!state.session?.user)return;const {data,error}=await sb.from('profiles').select('*').eq('id',state.session.user.id).maybeSingle();if(error)console.error(error);state.profile=data||null}
+function renderAccountButton(){const label=$('#accountLabel');if(!label)return;if(state.profile){label.textContent=state.profile.full_name||state.profile.email||'حساب من';$('#accountIcon').textContent=isAdmin()?'◆':'●'}else{label.textContent='ورود / عضویت';$('#accountIcon').textContent='◌'}}
+async function onLogin(e){e.preventDefault();if(!requireBackend())return;setMsg('#loginMessage','در حال ورود…');const f=new FormData(e.currentTarget),identity=String(f.get('identity')).trim(),password=String(f.get('password'));const credentials=identity.includes('@')?{email:identity,password}:{phone:normalizePhone(identity),password};const {data,error}=await sb.auth.signInWithPassword(credentials);if(error){setMsg('#loginMessage',humanError(error),'error');return}state.session=data.session;await loadProfile();setMsg('#loginMessage','ورود موفق بود.','ok');renderAccountButton();closeModals();toast('خوش آمدید.');if(state.afterLogin){const fn=state.afterLogin;state.afterLogin=null;await fn()}}
+async function onRegister(e){e.preventDefault();if(!requireBackend())return;setMsg('#registerMessage','در حال ساخت حساب…');const f=new FormData(e.currentTarget),mode=String(f.get('registerMode')),name=String(f.get('name')).trim(),email=String(f.get('email')).trim(),mobile=String(f.get('mobile')).trim(),password=String(f.get('password'));if(password.length<8){setMsg('#registerMessage','رمز عبور حداقل ۸ کاراکتر باشد.','error');return}let payload;if(mode==='phone'){if(!mobile){setMsg('#registerMessage','شماره موبایل لازم است.','error');return}payload={phone:normalizePhone(mobile),password,options:{channel:'sms',data:{full_name:name,mobile,contact_email:email,locale:'fa'}}}}else{if(!email){setMsg('#registerMessage','ایمیل لازم است.','error');return}payload={email,password,options:{emailRedirectTo:cfg.SITE_URL||location.origin,data:{full_name:name,mobile,contact_email:email,locale:'fa'}}}}const {data,error}=await sb.auth.signUp(payload);if(error){setMsg('#registerMessage',humanError(error),'error');return}if(data.session){state.session=data.session;await loadProfile();renderAccountButton();closeModals();toast('حساب ساخته شد.')}else setMsg('#registerMessage',mode==='phone'?'کد/تأیید موبایل را تکمیل کن.':'لینک تأیید به ایمیل ارسال شد.','ok')}
+async function logout(){if(configured)await sb.auth.signOut();state.session=null;state.profile=null;renderAccountButton();closeModals();toast('از حساب خارج شدید.','warn')}
+
+async function openDashboard(tab='overview'){if(!requireUser(()=>openDashboard(tab)))return;state.dashTab=tab;await renderDashboard();openModal('dashboardModal')}
+async function renderDashboard(){if(!state.profile)return;$('#dashboardTitle').textContent=state.profile.full_name||'حساب کاربری';$('#adminOpenBtn').hidden=!isAdmin();$$('[data-dash-tab]').forEach(b=>b.classList.toggle('active',b.dataset.dashTab===state.dashTab));const c=$('#dashboardContent');c.innerHTML='<div class="loading">در حال دریافت اطلاعات…</div>';if(state.dashTab==='downloads')c.innerHTML=await dashboardDownloads();else if(state.dashTab==='orders')c.innerHTML=await dashboardOrders();else if(state.dashTab==='licenses')c.innerHTML=await dashboardLicenses();else if(state.dashTab==='profile')c.innerHTML=dashboardProfile();else c.innerHTML=await dashboardOverview();bindDashboardActions()}
+async function dashboardOverview(){const [{data:dls},{data:orders}]=await Promise.all([sb.rpc('list_my_downloads'),sb.from('orders').select('id,status').eq('user_id',state.session.user.id)]);return `<div class="stat-grid"><div class="stat-card"><strong>${(dls||[]).length}</strong><span>محصول در کتابخانه</span></div><div class="stat-card"><strong>${(orders||[]).length}</strong><span>سفارش</span></div><div class="stat-card"><strong>${(orders||[]).filter(x=>x.status==='pending').length}</strong><span>در انتظار تأیید</span></div></div><div class="dash-section"><h4>وضعیت حساب</h4><p>حساب شما به Backend واقعی متصل است و خریدها از هر دستگاه بعد از ورود در دسترس خواهند بود.</p></div>`}
+async function dashboardDownloads(){const {data,error}=await sb.rpc('list_my_downloads');if(error)return `<p>${esc(humanError(error))}</p>`;return `<div class="admin-toolbar"><h4>دانلودهای من</h4><span>${data.length} محصول</span></div><div class="download-list">${data.map(x=>`<article class="download-card"><div><span>${esc(x.software_category)}</span><h4>${esc(x.product_name)}</h4><p>نسخه ${esc(x.current_version||'—')} · دریافت ${esc(fmtDate(x.granted_at))}</p></div><button class="btn btn-primary" data-download-path="${esc(x.file_path||'')}" ${x.file_path?'':'disabled'}>${x.file_path?'دانلود امن':'فایل نسخه هنوز بارگذاری نشده'}</button></article>`).join('')||'<div class="empty-state">هنوز محصولی در حساب شما نیست.</div>'}</div>`}
+async function dashboardOrders(){const {data,error}=await sb.from('orders').select('*, order_items(*, products(name,slug))').eq('user_id',state.session.user.id).order('created_at',{ascending:false});if(error)return `<p>${esc(humanError(error))}</p>`;return tableWrap('<tr><th>محصول</th><th>مبلغ</th><th>روش</th><th>وضعیت</th><th>تاریخ</th></tr>',(data||[]).map(o=>`<tr><td>${esc(o.order_items?.map(i=>i.product_name_snapshot||i.products?.name).join(', ')||'—')}</td><td>${esc(money(o.total_toman))}</td><td>${o.payment_method==='card_to_card'?'کارت‌به‌کارت':esc(o.payment_method)}</td><td><span class="pill ${esc(o.status)}">${statusFa(o.status)}</span></td><td>${esc(fmtDate(o.created_at))}</td></tr>`).join('')||'<tr><td colspan="5">سفارشی وجود ندارد.</td></tr>')}
+async function dashboardLicenses(){const {data}=await sb.rpc('list_my_downloads');return `<div class="dash-section"><h4>لایسنس‌ها</h4><p>ساختار لایسنس آماده است؛ محصولاتی که بعداً نیاز به License Key داشته باشند در همین بخش نمایش داده می‌شوند.</p>${(data||[]).map(x=>`<div class="license-row"><strong>${esc(x.product_name)}</strong><span>نسخه ${esc(x.current_version||'—')}</span></div>`).join('')}</div>`}
+function dashboardProfile(){return `<div class="dash-section"><h4>پروفایل</h4><form id="profileForm" class="admin-grid-form"><label>نام و نام خانوادگی<input name="full_name" value="${esc(state.profile.full_name||'')}"></label><label>شماره موبایل<input name="mobile" value="${esc(state.profile.mobile||'')}" dir="ltr"></label><label class="wide">ایمیل تماس<input name="email" type="email" value="${esc(state.profile.email||'')}" dir="ltr"></label><button class="btn btn-primary wide">ذخیره تغییرات</button></form></div>`}
+function bindDashboardActions(){$$('[data-download-path]').forEach(b=>b.onclick=()=>secureDownload(b.dataset.downloadPath));$('#profileForm')?.addEventListener('submit',saveProfile)}
+async function secureDownload(path){if(!path)return;const ttl=Number(cfg.DOWNLOAD_URL_TTL_SECONDS||300);const {data,error}=await sb.storage.from('product-files').createSignedUrl(path,ttl,{download:true});if(error){toast(humanError(error),'warn');return}window.location.href=data.signedUrl}
+async function saveProfile(e){e.preventDefault();const f=new FormData(e.currentTarget);const patch={full_name:String(f.get('full_name')).trim(),mobile:String(f.get('mobile')).trim()||null,email:String(f.get('email')).trim()||null};const {data,error}=await sb.from('profiles').update(patch).eq('id',state.session.user.id).select().single();if(error){toast(humanError(error),'warn');return}state.profile=data;renderAccountButton();toast('پروفایل ذخیره شد.')}
+
+async function submitCardPayment(e){e.preventDefault();if(!requireUser())return;const p=state.products.find(x=>String(x.id)===String(state.activeCheckout));if(!p)return;const f=new FormData(e.currentTarget),file=f.get('receipt'),ref=String(f.get('reference')).trim();setMsg('#paymentMessage','در حال ثبت سفارش و آپلود رسید…');const {data:orderId,error:oerr}=await sb.rpc('create_card_order',{p_product_id:p.id});if(oerr){setMsg('#paymentMessage',humanError(oerr),'error');return}if(!(file instanceof File)||!file.size){setMsg('#paymentMessage','فایل رسید را انتخاب کن.','error');return}const ext=(file.name.split('.').pop()||'jpg').replace(/[^a-zA-Z0-9]/g,'');const path=`${state.session.user.id}/${orderId}/${Date.now()}.${ext}`;const {error:uerr}=await sb.storage.from('payment-receipts').upload(path,file,{upsert:false});if(uerr){setMsg('#paymentMessage',humanError(uerr),'error');return}const {error:upErr}=await sb.from('orders').update({transaction_reference:ref,receipt_path:path}).eq('id',orderId);if(upErr){setMsg('#paymentMessage',humanError(upErr),'error');return}setMsg('#paymentMessage','سفارش و رسید ثبت شد. بعد از تأیید، محصول خودکار وارد دانلودهای شما می‌شود.','ok');toast('سفارش در انتظار تأیید ثبت شد.');e.currentTarget.reset()}
+
+async function openAdmin(tab='overview'){if(!isAdmin()){toast('دسترسی مدیریت ندارید.','warn');return}state.adminTab=tab;await renderAdmin();openModal('adminModal')}
+async function adminData(){const [projects,products,lessons,orders,users,versions]=await Promise.all([sb.from('projects').select('*').order('sort_order'),sb.from('products').select('*').order('sort_order'),sb.from('lessons').select('*').order('sort_order'),sb.from('orders').select('*, profiles:user_id(full_name,email,mobile), order_items(*, products(name))').order('created_at',{ascending:false}),sb.from('profiles').select('*').order('created_at',{ascending:false}),sb.from('product_versions').select('*').order('created_at',{ascending:false})]);for(const r of [projects,products,lessons,orders,users,versions])if(r.error)console.error(r.error);return {projects:projects.data||[],products:products.data||[],lessons:lessons.data||[],orders:orders.data||[],users:users.data||[],versions:versions.data||[]}}
+async function renderAdmin(){if(!isAdmin())return;$$('[data-admin-tab]').forEach(b=>b.classList.toggle('active',b.dataset.adminTab===state.adminTab));const c=$('#adminContent');c.innerHTML='<div class="loading">در حال دریافت…</div>';const d=await adminData();if(state.adminTab==='projects')c.innerHTML=adminProjects(d);else if(state.adminTab==='products')c.innerHTML=adminProducts(d);else if(state.adminTab==='lessons')c.innerHTML=adminLessons(d);else if(state.adminTab==='orders')c.innerHTML=await adminOrders(d);else if(state.adminTab==='users')c.innerHTML=adminUsers(d);else if(state.adminTab==='settings')c.innerHTML=adminSettings();else c.innerHTML=adminOverview(d);bindAdminActions(d)}
+function adminOverview(d){return `<div class="stat-grid"><div class="stat-card"><strong>${d.users.length}</strong><span>کاربر</span></div><div class="stat-card"><strong>${d.orders.filter(o=>o.status==='pending').length}</strong><span>پرداخت در انتظار</span></div><div class="stat-card"><strong>${d.products.length}</strong><span>محصول</span></div><div class="stat-card"><strong>${d.projects.length}</strong><span>پروژه</span></div></div><div class="dash-section"><h4>Backend</h4><p><span class="sync-state"><i class="sync-dot"></i> اتصال امن Supabase فعال است</span></p></div>`}
+function adminProjects(d){const edit=d.projects.find(x=>x.id===state.adminEdit.project)||{};return `<div class="admin-two-col"><div><div class="admin-toolbar"><h4>پروژه‌ها</h4><span>${d.projects.length}</span></div>${tableWrap('<tr><th>عنوان</th><th>وضعیت</th><th>سال</th><th></th></tr>',d.projects.map(p=>`<tr><td>${esc(p.title_fa)}</td><td>${esc(p.status)}</td><td>${esc(p.year||'')}</td><td><button class="row-action" data-edit-project="${p.id}">ویرایش</button> <button class="row-action secondary" data-delete-project="${p.id}">حذف</button></td></tr>`).join(''))}</div><div class="dash-section" style="margin-top:0"><h4>${edit.id?'ویرایش پروژه':'افزودن پروژه'}</h4><form id="projectForm" class="admin-grid-form"><input type="hidden" name="id" value="${esc(edit.id||'')}"><label>عنوان فارسی<input name="title_fa" required value="${esc(edit.title_fa||'')}"></label><label>عنوان انگلیسی<input name="title_en" value="${esc(edit.title_en||'')}"></label><label>نوع<select name="type">${['Architecture','Residential','Interior'].map(x=>`<option ${edit.type===x?'selected':''}>${x}</option>`).join('')}</select></label><label>سال<input name="year" value="${esc(edit.year||'2026')}"></label><label>لوکیشن فارسی<input name="location_fa" value="${esc(edit.location_fa||'')}"></label><label>متراژ<input name="area" value="${esc(edit.area||'')}"></label><label>وضعیت<select name="status">${['draft','published','archived'].map(x=>`<option ${edit.status===x?'selected':''}>${x}</option>`).join('')}</select></label><label>ترتیب<input name="sort_order" type="number" value="${esc(edit.sort_order??100)}"></label><label class="wide">توضیح<textarea name="description_fa" rows="4">${esc(edit.description_fa||'')}</textarea></label><label class="wide">کاور<input name="cover" type="file" accept="image/*"></label><label class="wide">گالری (چند تصویر)<input name="gallery" type="file" accept="image/*" multiple></label><button class="btn btn-primary wide">${edit.id?'ذخیره تغییرات':'افزودن پروژه'} +</button></form></div></div>`}
+function adminProducts(d){const edit=d.products.find(x=>x.id===state.adminEdit.product)||{};return `<div class="admin-two-col"><div><div class="admin-toolbar"><h4>محصولات</h4><span>${d.products.length}</span></div>${tableWrap('<tr><th>محصول</th><th>نرم‌افزار</th><th>قیمت</th><th>وضعیت</th><th></th></tr>',d.products.map(p=>`<tr><td>${esc(p.name)}<br><small>V${esc(p.current_version||'—')}</small></td><td>${esc(p.software_category)}</td><td>${p.is_free?'رایگان':money(p.price_toman)}</td><td>${esc(p.status)}</td><td><button class="row-action" data-edit-product="${p.id}">ویرایش</button> <button class="row-action secondary" data-delete-product="${p.id}">حذف</button></td></tr>`).join(''))}</div><div><div class="dash-section" style="margin-top:0"><h4>${edit.id?'ویرایش محصول':'افزودن محصول'}</h4><form id="productForm" class="admin-grid-form"><input type="hidden" name="id" value="${esc(edit.id||'')}"><label>نام محصول<input name="name" required value="${esc(edit.name||'')}"></label><label>نرم‌افزار<select name="software_category">${['AutoCAD','3ds Max','D5 Render','Lumion','Photoshop','AI Tools','Other'].map(x=>`<option ${edit.software_category===x?'selected':''}>${x}</option>`).join('')}</select></label><label>نوع<select name="product_type">${['script','plugin','preset','template','other'].map(x=>`<option ${edit.product_type===x?'selected':''}>${x}</option>`).join('')}</select></label><label>نسخه جاری<input name="current_version" value="${esc(edit.current_version||'0.1')}"></label><label>قیمت تومان<input name="price_toman" type="number" value="${esc(edit.price_toman??0)}"></label><label>رایگان<select name="is_free"><option value="false" ${!edit.is_free?'selected':''}>خیر</option><option value="true" ${edit.is_free?'selected':''}>بله</option></select></label><label>وضعیت<select name="status">${['draft','published','beta','coming_soon','archived'].map(x=>`<option ${edit.status===x?'selected':''}>${x}</option>`).join('')}</select></label><label>ترتیب<input name="sort_order" type="number" value="${esc(edit.sort_order??100)}"></label><label class="wide">توضیح<textarea name="description_fa" rows="4">${esc(edit.description_fa||'')}</textarea></label><label class="wide">ویژگی‌ها — هر خط یک مورد<textarea name="features_fa" rows="4">${esc((edit.features_fa||[]).join('\n'))}</textarea></label><label class="wide">کاور<input name="cover" type="file" accept="image/*"></label><button class="btn btn-primary wide">${edit.id?'ذخیره تغییرات':'افزودن محصول'} +</button></form></div><div class="dash-section"><h4>بارگذاری نسخه جدید</h4><form id="versionForm" class="admin-grid-form"><label class="wide">محصول<select name="product_id">${d.products.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('')}</select></label><label>نسخه<input name="version" required placeholder="0.1.4"></label><label>فایل ZIP / Plugin<input name="file" type="file" required></label><label class="wide">تغییرات نسخه<textarea name="changelog_fa" rows="3"></textarea></label><button class="btn btn-primary wide">آپلود نسخه امن</button></form></div></div></div>`}
+function adminLessons(d){const edit=d.lessons.find(x=>x.id===state.adminEdit.lesson)||{};return `<div class="admin-two-col"><div><div class="admin-toolbar"><h4>آموزش‌ها</h4><span>${d.lessons.length}</span></div>${tableWrap('<tr><th>عنوان</th><th>دسته</th><th>وضعیت</th><th></th></tr>',d.lessons.map(l=>`<tr><td>${esc(l.title_fa)}</td><td>${esc(l.category)}</td><td>${esc(l.status)}</td><td><button class="row-action" data-edit-lesson="${l.id}">ویرایش</button> <button class="row-action secondary" data-delete-lesson="${l.id}">حذف</button></td></tr>`).join(''))}</div><div class="dash-section" style="margin-top:0"><h4>${edit.id?'ویرایش آموزش':'افزودن آموزش'}</h4><form id="lessonForm" class="admin-grid-form"><input type="hidden" name="id" value="${esc(edit.id||'')}"><label>عنوان فارسی<input name="title_fa" required value="${esc(edit.title_fa||'')}"></label><label>عنوان انگلیسی<input name="title_en" value="${esc(edit.title_en||'')}"></label><label>دسته<input name="category" value="${esc(edit.category||'AutoCAD')}"></label><label>مدت<input name="duration" value="${esc(edit.duration||'10 min')}"></label><label>وضعیت<select name="status">${['draft','published','archived'].map(x=>`<option ${edit.status===x?'selected':''}>${x}</option>`).join('')}</select></label><label>ترتیب<input name="sort_order" type="number" value="${esc(edit.sort_order??100)}"></label><label class="wide">توضیح کوتاه<input name="subtitle_fa" value="${esc(edit.subtitle_fa||'')}"></label><label class="wide">متن آموزش<textarea name="body_fa" rows="6">${esc(edit.body_fa||'')}</textarea></label><button class="btn btn-primary wide">${edit.id?'ذخیره تغییرات':'افزودن آموزش'} +</button></form></div></div>`}
+async function adminOrders(d){const rows=[];for(const o of d.orders){let receipt='—';if(o.receipt_path){const {data}=await sb.storage.from('payment-receipts').createSignedUrl(o.receipt_path,300);if(data?.signedUrl)receipt=`<a class="row-action" href="${esc(data.signedUrl)}" target="_blank">مشاهده رسید</a>`}rows.push(`<tr><td>${esc(o.profiles?.full_name||o.profiles?.email||'')}</td><td>${esc(o.order_items?.map(i=>i.product_name_snapshot||i.products?.name).join(', ')||'')}</td><td>${esc(money(o.total_toman))}</td><td>${esc(o.transaction_reference||'—')}</td><td>${receipt}</td><td><span class="pill ${o.status}">${statusFa(o.status)}</span></td><td>${o.status==='pending'?`<button class="row-action" data-approve-order="${o.id}">تأیید</button> <button class="row-action secondary" data-reject-order="${o.id}">رد</button>`:'—'}</td></tr>`)}return `<div class="admin-toolbar"><h4>سفارش‌ها</h4><span class="pill pending">${d.orders.filter(o=>o.status==='pending').length} در انتظار</span></div>${tableWrap('<tr><th>کاربر</th><th>محصول</th><th>مبلغ</th><th>پیگیری</th><th>رسید</th><th>وضعیت</th><th></th></tr>',rows.join('')||'<tr><td colspan="7">سفارشی وجود ندارد.</td></tr>')}`}
+function adminUsers(d){return `<div class="admin-toolbar"><h4>کاربران</h4><span>${d.users.length} حساب</span></div>${tableWrap('<tr><th>نام</th><th>موبایل</th><th>ایمیل</th><th>نقش</th><th>دسترسی هدیه</th></tr>',d.users.map(u=>`<tr><td>${esc(u.full_name)}</td><td dir="ltr">${esc(u.mobile||'')}</td><td dir="ltr">${esc(u.email||'')}</td><td>${esc(u.role)}</td><td><select data-grant-product="${u.id}"><option value="">انتخاب محصول…</option>${d.products.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('')}</select></td></tr>`).join(''))}`}
+function adminSettings(){const bank=state.settings.bank_card||{};return `<div class="dash-section"><h4>تنظیمات پرداخت کارت‌به‌کارت</h4><form id="settingsForm" class="admin-grid-form"><label>شماره کارت<input name="number" dir="ltr" value="${esc(bank.number||'')}"></label><label>نام صاحب کارت<input name="owner" value="${esc(bank.owner||'صدف علیزاده')}"></label><button class="btn btn-primary wide">ذخیره تنظیمات</button></form><p><small>هیچ کلید API یا اطلاعات محرمانه‌ای در Site Settings ذخیره نکن.</small></p></div>`}
+function bindAdminActions(d){$$('[data-edit-project]').forEach(b=>b.onclick=()=>{state.adminEdit.project=b.dataset.editProject;renderAdmin()});$$('[data-edit-product]').forEach(b=>b.onclick=()=>{state.adminEdit.product=b.dataset.editProduct;renderAdmin()});$$('[data-edit-lesson]').forEach(b=>b.onclick=()=>{state.adminEdit.lesson=b.dataset.editLesson;renderAdmin()});$$('[data-delete-project]').forEach(b=>b.onclick=()=>deleteAdmin('projects',b.dataset.deleteProject));$$('[data-delete-product]').forEach(b=>b.onclick=()=>deleteAdmin('products',b.dataset.deleteProduct));$$('[data-delete-lesson]').forEach(b=>b.onclick=()=>deleteAdmin('lessons',b.dataset.deleteLesson));$$('[data-approve-order]').forEach(b=>b.onclick=()=>approveOrder(b.dataset.approveOrder));$$('[data-reject-order]').forEach(b=>b.onclick=()=>rejectOrder(b.dataset.rejectOrder));$$('[data-grant-product]').forEach(s=>s.onchange=()=>{if(s.value)grantProduct(s.dataset.grantProduct,s.value)});$('#projectForm')?.addEventListener('submit',saveProject);$('#productForm')?.addEventListener('submit',saveProduct);$('#versionForm')?.addEventListener('submit',uploadVersion);$('#lessonForm')?.addEventListener('submit',saveLesson);$('#settingsForm')?.addEventListener('submit',saveSettings)}
+async function uploadSiteMedia(file,prefix){if(!(file instanceof File)||!file.size)return null;const ext=(file.name.split('.').pop()||'jpg').replace(/[^a-zA-Z0-9]/g,'');const path=`${prefix}/${Date.now()}-${Math.random().toString(36).slice(2,7)}.${ext}`;const {error}=await sb.storage.from('site-media').upload(path,file);if(error)throw error;return sb.storage.from('site-media').getPublicUrl(path).data.publicUrl}
+async function saveProject(e){e.preventDefault();const f=new FormData(e.currentTarget),id=String(f.get('id')||'');try{const cover=await uploadSiteMedia(f.get('cover'),'projects');const galleryFiles=f.getAll('gallery').filter(x=>x instanceof File&&x.size);const gallery=[];for(const file of galleryFiles)gallery.push(await uploadSiteMedia(file,'projects'));const patch={title_fa:String(f.get('title_fa')),title_en:String(f.get('title_en')||''),type:String(f.get('type')),type_fa:String(f.get('type'))==='Interior'?'طراحی داخلی':String(f.get('type'))==='Residential'?'مسکونی':'معماری',year:String(f.get('year')||''),location_fa:String(f.get('location_fa')||''),area:String(f.get('area')||''),description_fa:String(f.get('description_fa')||''),status:String(f.get('status')),sort_order:Number(f.get('sort_order')||100)};if(cover)patch.cover_image_url=cover;if(gallery.length)patch.gallery=gallery;if(id){const {error}=await sb.from('projects').update(patch).eq('id',id);if(error)throw error}else{patch.slug=slugify(patch.title_en||patch.title_fa);patch.created_by=state.session.user.id;const {error}=await sb.from('projects').insert(patch);if(error)throw error}state.adminEdit.project=null;await loadPublicData();await renderAdmin();toast('پروژه ذخیره شد.')}catch(err){toast(humanError(err),'warn')}}
+async function saveProduct(e){e.preventDefault();const f=new FormData(e.currentTarget),id=String(f.get('id')||'');try{const cover=await uploadSiteMedia(f.get('cover'),'products');const patch={name:String(f.get('name')),software_category:String(f.get('software_category')),product_type:String(f.get('product_type')),current_version:String(f.get('current_version')||''),price_toman:Number(f.get('price_toman')||0),is_free:String(f.get('is_free'))==='true',status:String(f.get('status')),sort_order:Number(f.get('sort_order')||100),description_fa:String(f.get('description_fa')||''),features_fa:String(f.get('features_fa')||'').split('\n').map(x=>x.trim()).filter(Boolean)};if(cover)patch.cover_image_url=cover;if(id){const {error}=await sb.from('products').update(patch).eq('id',id);if(error)throw error}else{patch.slug=slugify(patch.name);patch.created_by=state.session.user.id;const {error}=await sb.from('products').insert(patch);if(error)throw error}state.adminEdit.product=null;await loadPublicData();await renderAdmin();toast('محصول ذخیره شد.')}catch(err){toast(humanError(err),'warn')}}
+async function uploadVersion(e){e.preventDefault();const f=new FormData(e.currentTarget),productId=String(f.get('product_id')),version=String(f.get('version')).trim(),file=f.get('file');if(!(file instanceof File)||!file.size)return;try{const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_'),path=`${productId}/${version}/${Date.now()}-${safe}`;let {error}=await sb.storage.from('product-files').upload(path,file);if(error)throw error;({error}=await sb.rpc('admin_register_product_version',{p_product_id:productId,p_version:version,p_file_path:path,p_changelog_fa:String(f.get('changelog_fa')||'')}));if(error)throw error;await loadPublicData();await renderAdmin();toast('نسخه جدید در فضای خصوصی آپلود شد.')}catch(err){toast(humanError(err),'warn')}}
+async function saveLesson(e){e.preventDefault();const f=new FormData(e.currentTarget),id=String(f.get('id')||''),patch={title_fa:String(f.get('title_fa')),title_en:String(f.get('title_en')||''),category:String(f.get('category')||''),duration:String(f.get('duration')||''),status:String(f.get('status')),sort_order:Number(f.get('sort_order')||100),subtitle_fa:String(f.get('subtitle_fa')||''),body_fa:String(f.get('body_fa')||'')};let error;if(id)({error}=await sb.from('lessons').update(patch).eq('id',id));else{patch.slug=slugify(patch.title_en||patch.title_fa);patch.created_by=state.session.user.id;({error}=await sb.from('lessons').insert(patch))}if(error){toast(humanError(error),'warn');return}state.adminEdit.lesson=null;await loadPublicData();await renderAdmin();toast('آموزش ذخیره شد.')}
+async function deleteAdmin(table,id){if(!confirm('این مورد حذف شود؟'))return;const {error}=await sb.from(table).delete().eq('id',id);if(error){toast(humanError(error),'warn');return}await loadPublicData();await renderAdmin();toast('حذف شد.','warn')}
+async function approveOrder(id){const {error}=await sb.rpc('admin_approve_order',{p_order_id:id,p_admin_note:null});if(error){toast(humanError(error),'warn');return}await renderAdmin();toast('پرداخت تأیید شد و محصول وارد حساب کاربر شد.')}
+async function rejectOrder(id){const note=prompt('دلیل رد پرداخت (اختیاری):')||null;const {error}=await sb.rpc('admin_reject_order',{p_order_id:id,p_admin_note:note});if(error){toast(humanError(error),'warn');return}await renderAdmin();toast('سفارش رد شد.','warn')}
+async function grantProduct(userId,productId){const {error}=await sb.rpc('admin_grant_product',{p_user_id:userId,p_product_id:productId});if(error){toast(humanError(error),'warn');return}toast('محصول به حساب کاربر اضافه شد.')}
+async function saveSettings(e){e.preventDefault();const f=new FormData(e.currentTarget),value={number:String(f.get('number')).trim(),owner:String(f.get('owner')).trim()};const {error}=await sb.from('site_settings').update({value}).eq('key','bank_card');if(error){toast(humanError(error),'warn');return}state.settings.bank_card=value;toast('تنظیمات پرداخت ذخیره شد.')}
+
+function tableWrap(head,body){return `<div class="table-wrap"><table><thead>${head}</thead><tbody>${body}</tbody></table></div>`}
+function statusFa(s){return ({pending:'در انتظار',paid:'تأیید شده',rejected:'رد شده',cancelled:'لغو شده',refunded:'بازگشت وجه'})[s]||s}
+function humanError(e){const m=String(e?.message||e||'خطای نامشخص');if(m.includes('Invalid login credentials'))return 'ایمیل/موبایل یا رمز عبور درست نیست.';if(m.includes('Email not confirmed'))return 'ابتدا ایمیل را تأیید کن.';if(m.includes('ALREADY_OWNED'))return 'این محصول از قبل در حساب شماست.';if(m.includes('PRODUCT_NOT_AVAILABLE'))return 'این محصول در حال حاضر قابل دریافت نیست.';if(m.includes('ADMIN_REQUIRED'))return 'دسترسی مدیریت لازم است.';return m}
+function bindStatic(){
+  $('#langToggle').onclick=()=>{state.lang=state.lang==='fa'?'en':'fa';renderI18n()};
+  $('#accountButton').onclick=()=>state.session?.user?openDashboard():openModal('authModal');
+  $$('[data-close-modal]').forEach(b=>b.onclick=closeModals);document.addEventListener('keydown',e=>e.key==='Escape'&&closeModals());
+  $$('[data-auth-tab]').forEach(b=>b.onclick=()=>{$$('[data-auth-tab]').forEach(x=>x.classList.toggle('active',x===b));$('#loginForm').classList.toggle('hidden',b.dataset.authTab!=='login');$('#registerForm').classList.toggle('hidden',b.dataset.authTab!=='register')});
+  $$('[data-register-mode]').forEach(b=>b.onclick=()=>{$$('[data-register-mode]').forEach(x=>x.classList.toggle('active',x===b));$('#registerForm [name="registerMode"]').value=b.dataset.registerMode});
+  $('#loginForm').addEventListener('submit',onLogin);$('#registerForm').addEventListener('submit',onRegister);$('#cardPaymentForm').addEventListener('submit',submitCardPayment);$('#logoutBtn').onclick=logout;$('#adminOpenBtn').onclick=()=>{closeModals();setTimeout(()=>openAdmin(),50)};
+  $$('[data-dash-tab]').forEach(b=>b.onclick=()=>{state.dashTab=b.dataset.dashTab;renderDashboard()});$$('[data-admin-tab]').forEach(b=>b.onclick=()=>{state.adminTab=b.dataset.adminTab;renderAdmin()});
+  const mt=$('#menuToggle');mt.onclick=()=>{const nav=$('.main-nav'),open=nav.dataset.open==='1';nav.dataset.open=open?'0':'1';if(open)nav.removeAttribute('style');else Object.assign(nav.style,{display:'flex',position:'absolute',top:'68px',left:'0',right:'0',padding:'18px',background:'rgba(247,248,251,.98)',borderBottom:'1px solid #dfe4ea',flexDirection:'column',alignItems:'stretch',gap:'16px'})};
+  const dot=$('.cursor-dot');if(matchMedia('(pointer:fine)').matches){addEventListener('mousemove',e=>{dot.style.opacity='1';dot.style.left=e.clientX+'px';dot.style.top=e.clientY+'px'});addEventListener('mouseleave',()=>dot.style.opacity='0')}
+}
+async function init(){bindStatic();await ensureSupabase();await loadPublicData();await loadSession();if(configured)sb.auth.onAuthStateChange(async(_event,session)=>{state.session=session;await loadProfile();renderAccountButton()});renderI18n()}
+init().catch(err=>{console.error(err);toast('خطا در راه‌اندازی سایت: '+humanError(err),'warn')});
+})();
+</script>
+</body></html>

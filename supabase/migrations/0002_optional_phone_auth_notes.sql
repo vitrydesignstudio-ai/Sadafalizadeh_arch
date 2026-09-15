@@ -1,0 +1,3 @@
+-- No schema changes are required for phone/password auth.
+-- Enable a supported SMS provider in Supabase Auth > Providers > Phone.
+-- The frontend uses Supabase native signUp/signInWithPassword for phone when configured.

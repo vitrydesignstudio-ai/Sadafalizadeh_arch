@@ -1,0 +1,17 @@
+/* v0.5 — auth, gateway, license additions */
+.text-action{border:0;background:transparent;padding:0;color:#1769ff;font:inherit;cursor:pointer;text-align:right;align-self:flex-start}
+.text-action:hover{text-decoration:underline}
+.login-mode{margin-bottom:12px}
+.gateway-box{border:1px solid #dfe4ea;background:#f8fafc;border-radius:12px;padding:16px}
+.gateway-box strong{display:block;margin-bottom:6px}
+.gateway-box p{margin:0;color:#667085;line-height:1.8}
+.payment-card.disabled{opacity:.45;pointer-events:none}
+.license-list{display:grid;gap:12px}
+.license-card{border:1px solid #dfe4ea;border-radius:14px;padding:16px;background:#fff}
+.license-card header{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.license-key{margin-top:12px;padding:12px;border-radius:10px;background:#f6f8fb;border:1px dashed #b7c2d0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;direction:ltr;text-align:left;letter-spacing:.08em;word-break:break-all}
+.license-meta{margin-top:9px;display:flex;gap:12px;flex-wrap:wrap;color:#667085;font-size:12px}
+.gateway-result{position:fixed;inset-inline:20px;top:86px;z-index:9998;max-width:720px;margin:auto;background:#fff;border:1px solid #dfe4ea;box-shadow:0 18px 55px rgba(20,35,55,.16);border-radius:14px;padding:18px;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.gateway-result.ok{border-color:#b7e0c4}.gateway-result.fail{border-color:#efb5b5}
+.recovery-hint{font-size:12px;color:#667085}
+@media(max-width:700px){.gateway-result{top:74px;inset-inline:12px;align-items:flex-start;flex-direction:column}.license-card header{flex-direction:column}}
