@@ -14,4 +14,12 @@
 .gateway-result{position:fixed;inset-inline:20px;top:86px;z-index:9998;max-width:720px;margin:auto;background:#fff;border:1px solid #dfe4ea;box-shadow:0 18px 55px rgba(20,35,55,.16);border-radius:14px;padding:18px;display:flex;justify-content:space-between;gap:16px;align-items:center}
 .gateway-result.ok{border-color:#b7e0c4}.gateway-result.fail{border-color:#efb5b5}
 .recovery-hint{font-size:12px;color:#667085}
+/* v0.6 — Digital Tools system foundation */
+.tools-category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+.tools-category-card{border:1px solid #dfe4ea;border-radius:18px;padding:22px;background:#fff;transition:.25s ease}
+.tools-category-card:hover{transform:translateY(-3px)}
+.tools-category-card h3{margin:0 0 8px}
+.tools-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tools-tags span{font-size:12px;padding:6px 10px;border-radius:999px;background:#f5f6f8}
+.product-status.free{color:#14804a}.product-status.premium{color:#8b5e00}
 @media(max-width:700px){.gateway-result{top:74px;inset-inline:12px;align-items:flex-start;flex-direction:column}.license-card header{flex-direction:column}}
