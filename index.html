@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#f7f8fb" />
-  <title>صدف علیزاده — معماری، آموزش و ابزارهای دیجیتال</title>
-  <meta name="description" content="پورتفولیو معماری، آموزش‌های کاربردی و ابزارهای دیجیتال صدف علیزاده." />
+  <title>صدف علیزاده — Architectural Designer & Visual Creative</title>
+  <meta name="description" content="پورتفولیو و پلتفرم حرفه‌ای صدف علیزاده؛ طراحی معماری، تجسم سه‌بعدی، محتوای دیجیتال، موشن و ابزارهای حرفه‌ای." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="assets/v03.css" />
   <link rel="stylesheet" href="assets/v04.css" />
   <link rel="stylesheet" href="assets/v05.css" />
+  <link rel="stylesheet" href="assets/personal.css" />
 </head>
 <body>
   <div class="setup-banner" id="setupBanner" hidden><strong>Backend هنوز تنظیم نشده است.</strong><span>فایل <code>assets/config.js</code> را با URL و Anon Key پروژه Supabase تکمیل کن. تا آن زمان سایت در حالت Preview است.</span></div>
@@ -26,6 +27,7 @@
       <span class="brand-copy"><strong>Sadaf Alizadeh</strong><small>@sadafalizadeh_arch</small></span>
     </a>
     <nav class="main-nav" aria-label="منوی اصلی">
+      <a href="#profile">پروفایل</a>
       <a href="#work" data-i18n="nav.work">نمونه‌کارها</a>
       <a href="#learn" data-i18n="nav.learn">آموزش</a>
       <a href="#tools" data-i18n="nav.tools">ابزارها</a>
@@ -40,54 +42,91 @@
   </header>
 
   <main>
-    <section class="hero section-shell">
-      <div class="hero-kicker reveal"><span class="dot"></span><span data-i18n="hero.kicker">معماری · تجسم معماری · آموزش · ابزارهای دیجیتال</span></div>
-      <div class="hero-grid">
-        <div class="hero-copy reveal">
-          <h1><span data-i18n="hero.line1">طراحی فضا.</span><em data-i18n="hero.line2">ساختن ورک‌فلو.</em></h1>
-          <p data-i18n="hero.body">پروژه‌های معماری، آموزش‌های کاربردی و ابزارهایی که از نیاز واقعی کار حرفه‌ای ساخته می‌شوند.</p>
+    <section class="hero section-shell personal-hero">
+      <div class="hero-kicker reveal"><span class="dot"></span><span>طراح معمار · Visual Creative · تهران</span></div>
+      <div class="hero-grid personal-hero-grid">
+        <div class="hero-copy personal-hero-copy reveal">
+          <div class="hero-role">ARCHITECTURAL DESIGNER &amp; VISUAL CREATIVE</div>
+          <h1><span>صدف علیزاده</span><em>معماری، تصویر و روایت.</em></h1>
+          <p>فعالیت من در تقاطع طراحی معماری و روایت بصری شکل گرفته؛ از توسعه کانسپت و تجسم سه‌بعدی تا کمپین‌های دیجیتال، موشن و تولید خلاقانه با کمک هوش مصنوعی.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#work"><span data-i18n="hero.ctaWork">مشاهده نمونه‌کارها</span><span>↗</span></a>
-            <a class="btn btn-ghost" href="#tools"><span data-i18n="hero.ctaTools">فروشگاه ابزارها</span><span>→</span></a>
+            <a class="btn btn-primary" href="#profile"><span>پروفایل حرفه‌ای</span><span>↗</span></a>
+            <a class="btn btn-ghost" href="#work"><span data-i18n="hero.ctaWork">مشاهده نمونه‌کارها</span><span>→</span></a>
+          </div>
+          <div class="hero-credentials">
+            <span>MASTER OF ARCHITECTURE</span>
+            <span>ARCHITECTURE / CGI / MOTION / DIGITAL CONTENT</span>
           </div>
         </div>
-        <div class="hero-board reveal" aria-label="Architectural identity board">
-          <div class="board-label">SADAF / PLATFORM 05</div>
-          <div class="board-axes"><div class="axis axis-x"></div><div class="axis axis-y"></div></div>
-          <div class="board-shape shape-a"></div><div class="board-shape shape-b"></div><div class="board-shape shape-c"></div>
-          <svg class="board-sketch" viewBox="0 0 600 420" aria-hidden="true"><path d="M40 300 C140 242 190 340 290 265 S455 170 555 230"/><path d="M65 335 L205 210 L344 302 L522 118"/><circle cx="432" cy="116" r="54"/><rect x="128" y="85" width="114" height="80" rx="2"/></svg>
-          <div class="board-caption"><span>PORTFOLIO / LEARN / TOOLS</span><span>2026</span></div>
-        </div>
+        <figure class="portrait-card reveal">
+          <div class="portrait-frame"><img src="assets/sadaf-portrait.webp" alt="پرتره صدف علیزاده" loading="eager"></div>
+          <figcaption><span>SADAF ALIZADEH</span><b>SELF-INITIATED CREATIVE PORTFOLIO · 2026</b></figcaption>
+        </figure>
       </div>
       <div class="hero-meta reveal">
-        <div><strong>01</strong><span>پروژه‌های معماری</span></div><div><strong>02</strong><span>تجسم و CGI</span></div><div><strong>03</strong><span>آموزش</span></div><div><strong>04</strong><span>ابزار و پلاگین</span></div>
+        <div><strong>01</strong><span>Architectural Design</span></div>
+        <div><strong>02</strong><span>3D Visualization</span></div>
+        <div><strong>03</strong><span>Motion &amp; Digital</span></div>
+        <div><strong>04</strong><span>Creative Direction</span></div>
       </div>
     </section>
 
     <section class="marquee" aria-label="Specialties"><div class="marquee-track"><span>ARCHITECTURE</span><b>✦</b><span>CGI</span><b>✦</b><span>AUTOCAD</span><b>✦</b><span>3DS MAX</span><b>✦</b><span>D5 RENDER</span><b>✦</b><span>LUMION</span><b>✦</b><span>AI TOOLS</span><b>✦</b><span>ARCHITECTURE</span><b>✦</b><span>CGI</span><b>✦</b><span>AUTOCAD</span></div></section>
 
+    <section class="section-shell section profile-section" id="profile">
+      <div class="profile-lead reveal">
+        <span class="eyebrow">01 / PROFILE</span>
+        <h2>طراحی معماری با ذهنیت بصری و چندرشته‌ای.</h2>
+        <p>من صدف علیزاده، طراح معمار و Visual Creative هستم. مسیر کاری من معماری، تجسم سه‌بعدی، تولید محتوای دیجیتال، موشن دیزاین و Creative Direction را در یک زبان بصری منسجم کنار هم قرار می‌دهد.</p>
+      </div>
+      <div class="profile-cards">
+        <article class="profile-card reveal education-card">
+          <span>EDUCATION</span><h3>Master of Architecture</h3><p>Tehran, Iran</p>
+          <small>Architecture · Interior Design · CG Production · Digital Content · Motion · Creative Direction</small>
+        </article>
+        <article class="profile-card reveal">
+          <span>CORE EXPERTISE</span>
+          <ul><li>Architectural Design</li><li>Visualization</li><li>Motion &amp; Digital</li><li>Creative Direction &amp; Professional Workflow</li></ul>
+        </article>
+        <article class="profile-card reveal tools-card">
+          <span>SOFTWARE &amp; TOOLS</span>
+          <div class="software-grid"><b>AutoCAD</b><b>3ds Max</b><b>Corona Renderer</b><b>Lumion</b><b>Unreal Engine</b><b>Photoshop</b><b>Premiere Pro</b><b>After Effects</b></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-shell section portfolio-editorial" aria-label="Creative portfolio highlights">
+      <div class="section-heading reveal"><div><span class="eyebrow">02 / CREATIVE PORTFOLIO</span><h2>از فضا تا تجربه‌ی بصری.</h2></div><p>بخشی از پورتفولیوی ۲۰۲۶؛ معماری، روایت فضایی، تصویرسازی، موشن و سیستم‌های محتوایی در یک ورک‌فلو مشترک.</p></div>
+      <div class="portfolio-media-grid">
+        <figure class="portfolio-media-card wide reveal"><img src="assets/portfolio-exterior.webp" alt="نمونه معماری و تجسم سه‌بعدی"><figcaption><span>ARCHITECTURE / 3D</span><b>Spatial narrative &amp; exterior visualization</b></figcaption></figure>
+        <figure class="portfolio-media-card reveal"><img src="assets/portfolio-interior.webp" alt="فضا، متریال و اتمسفر"><figcaption><span>SPACE / MATERIAL</span><b>Atmosphere, materiality &amp; composition</b></figcaption></figure>
+        <figure class="portfolio-media-card reveal"><img src="assets/portfolio-moods.webp" alt="مطالعات روز و شب"><figcaption><span>VISUAL STORYTELLING</span><b>One project, multiple moods</b></figcaption></figure>
+        <figure class="portfolio-media-card wide reveal"><img src="assets/portfolio-motion.webp" alt="معماری در حرکت و محتوای دیجیتال"><figcaption><span>MOTION / DIGITAL</span><b>Architecture in motion &amp; sequential content</b></figcaption></figure>
+      </div>
+    </section>
+
     <section class="section-shell section" id="work">
-      <div class="section-heading reveal"><div><span class="eyebrow">01 / PORTFOLIO</span><h2 data-i18n="work.title">پروژه‌های منتخب</h2></div><p data-i18n="work.body">پروژه‌ها از دیتابیس واقعی خوانده می‌شوند و از پنل مدیریت قابل انتشار و ویرایش هستند.</p></div>
+      <div class="section-heading reveal"><div><span class="eyebrow">03 / SELECTED WORK</span><h2 data-i18n="work.title">پروژه‌های منتخب</h2></div><p data-i18n="work.body">پروژه‌ها از دیتابیس واقعی خوانده می‌شوند و از پنل مدیریت قابل انتشار و ویرایش هستند.</p></div>
       <div class="filters reveal" id="workFilters"></div><div class="work-grid" id="workGrid"></div>
     </section>
 
     <section class="section-shell section split-section" id="learn">
-      <div class="section-heading sticky-heading reveal"><div><span class="eyebrow">02 / LEARN</span><h2 data-i18n="learn.title">آموزش‌ها</h2></div><p data-i18n="learn.body">آموزش‌های کوتاه و اجرایی برای معماری، رندر و ابزارهای دیجیتال.</p></div>
+      <div class="section-heading sticky-heading reveal"><div><span class="eyebrow">04 / LEARN</span><h2 data-i18n="learn.title">آموزش‌ها</h2></div><p data-i18n="learn.body">آموزش‌های کوتاه و اجرایی برای معماری، رندر و ابزارهای دیجیتال.</p></div>
       <div class="learn-list" id="learnList"></div>
     </section>
 
     <section class="section-shell section" id="tools">
-      <div class="section-heading reveal"><div><span class="eyebrow">03 / STORE</span><h2 data-i18n="tools.title">فروشگاه ابزارها</h2></div><p data-i18n="tools.body">اسکریپت، پلاگین، پریست و ابزار برای نرم‌افزارهای مختلف؛ رایگان یا پولی.</p></div>
+      <div class="section-heading reveal"><div><span class="eyebrow">05 / STORE</span><h2 data-i18n="tools.title">فروشگاه ابزارها</h2></div><p data-i18n="tools.body">اسکریپت، پلاگین، پریست و ابزار برای نرم‌افزارهای مختلف؛ رایگان یا پولی.</p></div>
       <div class="store-toolbar reveal"><div class="category-scroll" id="toolCategories"></div><div class="store-note"><span class="live-dot"></span><span>خریدها و دانلودها به حساب واقعی کاربر متصل می‌شوند</span></div></div>
       <div class="products-grid" id="productsGrid"></div>
     </section>
 
     <section class="section-shell section about-section" id="about">
-      <div class="about-index reveal">04</div><div class="about-copy reveal"><span class="eyebrow">ABOUT / SADAF</span><h2>معماری با نگاه سیستمی.</h2><p>این پلتفرم سه بخش از مسیر کاری من را کنار هم می‌آورد: پروژه‌ها، آموزش و ابزارهایی که از نیاز واقعی پروژه ساخته می‌شوند.</p><div class="about-tags"><span>AutoCAD</span><span>3ds Max</span><span>Corona</span><span>D5 Render</span><span>Lumion</span><span>Photoshop</span><span>AI</span></div></div>
+      <div class="about-index reveal">06</div><div class="about-copy reveal"><span class="eyebrow">ABOUT / SADAF</span><h2>معماری، تصویر و تکنولوژی در یک سیستم.</h2><p>رویکرد من تفکر معماری را با ترکیب‌بندی، هویت بصری، داستان‌گویی و تکنولوژی پیوند می‌دهد تا تجربه‌هایی روشن، معاصر و هویت‌مند شکل بگیرند؛ از تصویر ثابت و CGI تا محتوای دیجیتال، موشن و تولید خلاقانه با کمک AI.</p><div class="about-tags"><span>Architecture</span><span>Visualization</span><span>Digital Content</span><span>Motion</span><span>Creative Direction</span><span>AI-Assisted Production</span></div></div>
       <div class="about-diagram reveal" aria-hidden="true"><div class="diagram-ring ring-a"></div><div class="diagram-ring ring-b"></div><div class="diagram-line line-a"></div><div class="diagram-line line-b"></div><span class="diagram-label dl1">DESIGN</span><span class="diagram-label dl2">CG</span><span class="diagram-label dl3">TOOLS</span></div>
     </section>
 
-    <section class="section-shell section contact-section" id="contact"><div class="contact-card reveal"><div><span class="eyebrow">05 / CONTACT</span><h2>پروژه، همکاری یا ایده‌ای برای ابزار داری؟</h2><p>برای درخواست پروژه یا همکاری می‌توانی از اینستاگرام در تماس باشی. فرم حرفه‌ای درخواست پروژه در فاز آنلاین اضافه می‌شود.</p></div><a class="contact-link" href="https://www.instagram.com/sadafalizadeh_arch/" target="_blank" rel="noreferrer"><span>@sadafalizadeh_arch</span><b>↗</b></a></div></section>
+    <section class="section-shell section contact-section" id="contact"><div class="contact-card reveal"><div><span class="eyebrow">07 / CONTACT</span><h2>پروژه، همکاری یا ایده‌ای برای ابزار داری؟</h2><p>برای درخواست پروژه یا همکاری می‌توانی از اینستاگرام در تماس باشی. فرم حرفه‌ای درخواست پروژه در فاز آنلاین اضافه می‌شود.</p></div><a class="contact-link" href="https://www.instagram.com/sadafalizadeh_arch/" target="_blank" rel="noreferrer"><span>@sadafalizadeh_arch</span><b>↗</b></a></div></section>
   </main>
 
   <footer class="site-footer section-shell"><div class="footer-brand"><strong>Sadaf Alizadeh</strong><span>Architecture · Education · Digital Tools</span></div><div class="footer-meta"><span>© 2026</span><a href="#top">بالا ↑</a></div></footer>
@@ -108,7 +147,6 @@
 
   <!-- CHECKOUT -->
   <div class="modal" id="checkoutModal" aria-hidden="true"><button class="modal-backdrop" data-close-modal></button><article class="modal-panel checkout-panel"><button class="modal-close" data-close-modal>×</button><span class="eyebrow">CHECKOUT</span><h3>ثبت سفارش</h3><div id="checkoutSummary"></div><div class="payment-methods"><button class="payment-card active" data-pay-method="card" type="button"><strong>کارت‌به‌کارت</strong><span>تأیید دستی توسط مدیر</span></button><button class="payment-card" data-pay-method="gateway" id="gatewayMethodBtn" type="button"><strong>درگاه آنلاین</strong><span id="gatewayMethodHint">پرداخت و فعال‌سازی خودکار</span></button></div><form id="cardPaymentForm" class="auth-form"><div class="bank-box"><span>اطلاعات کارت‌به‌کارت</span><strong id="bankCardNumber">در حال دریافت از تنظیمات سایت…</strong><small id="bankCardOwner">—</small></div><label>شماره پیگیری / توضیح پرداخت<input name="reference" required placeholder="مثلاً 123456"></label><label>تصویر رسید پرداخت<input name="receipt" type="file" accept="image/*,.pdf" required></label><button class="btn btn-primary" type="submit"><span>ثبت سفارش و رسید</span><span>✓</span></button><p class="form-message" id="paymentMessage"></p></form><div id="gatewayPaymentBox" class="auth-form hidden"><div class="gateway-box"><strong>پرداخت آنلاین</strong><p>بعد از بازگشت از درگاه، پرداخت روی سرور Verify می‌شود و محصول خودکار وارد «دانلودهای من» خواهد شد.</p></div><button class="btn btn-primary" id="gatewayPayBtn" type="button"><span>رفتن به درگاه</span><span>↗</span></button><p class="form-message" id="gatewayMessage"></p></div></article></div>
-
 
   <!-- PASSWORD RECOVERY -->
   <div class="modal" id="passwordRecoveryModal" aria-hidden="true"><button class="modal-backdrop" data-close-modal></button><article class="modal-panel auth-panel"><button class="modal-close" data-close-modal>×</button><div class="auth-head"><span class="eyebrow">SECURITY</span><h3>تنظیم رمز عبور جدید</h3><p>رمز جدید را حداقل ۸ کاراکتر انتخاب کن.</p></div><form id="newPasswordForm" class="auth-form"><label>رمز عبور جدید<input name="password" type="password" minlength="8" required autocomplete="new-password"></label><label>تکرار رمز<input name="confirm" type="password" minlength="8" required autocomplete="new-password"></label><button class="btn btn-primary" type="submit">ذخیره رمز جدید</button><p class="form-message" id="newPasswordMessage"></p></form></article></div>
