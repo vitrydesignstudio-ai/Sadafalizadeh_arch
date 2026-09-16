@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="assets/v04.css" />
   <link rel="stylesheet" href="assets/v05.css" />
   <link rel="stylesheet" href="assets/personal.css" />
+  <link rel="stylesheet" href="assets/v06.css" />
 </head>
 <body>
   <div class="setup-banner" id="setupBanner" hidden><strong>Backend هنوز تنظیم نشده است.</strong><span>فایل <code>assets/config.js</code> را با URL و Anon Key پروژه Supabase تکمیل کن. تا آن زمان سایت در حالت Preview است.</span></div>
@@ -30,7 +31,7 @@
       <a href="#profile">پروفایل</a>
       <a href="#work" data-i18n="nav.work">نمونه‌کارها</a>
       <a href="#learn" data-i18n="nav.learn">آموزش</a>
-      <a href="#tools" data-i18n="nav.tools">ابزارها</a>
+      <a href="#tools" data-v06-i18n="nav.tools">ابزارهای دیجیتال</a>
       <a href="#about" data-i18n="nav.about">درباره من</a>
       <a href="#contact" data-i18n="nav.contact">تماس</a>
     </nav>
@@ -115,9 +116,18 @@
       <div class="learn-list" id="learnList"></div>
     </section>
 
-    <section class="section-shell section" id="tools">
-      <div class="section-heading reveal"><div><span class="eyebrow">05 / STORE</span><h2 data-i18n="tools.title">فروشگاه ابزارها</h2></div><p data-i18n="tools.body">اسکریپت، پلاگین، پریست و ابزار برای نرم‌افزارهای مختلف؛ رایگان یا پولی.</p></div>
-      <div class="store-toolbar reveal"><div class="category-scroll" id="toolCategories"></div><div class="store-note"><span class="live-dot"></span><span>خریدها و دانلودها به حساب واقعی کاربر متصل می‌شوند</span></div></div>
+    <section class="section-shell section digital-tools-intro" id="tools">
+      <div class="section-heading reveal"><div><span class="eyebrow">05 / DIGITAL TOOLS</span><h2 data-v06-i18n="tools.title">ابزارهای دیجیتال</h2></div><p data-v06-i18n="tools.body">کتابخانه‌ای از اسکریپت، پلاگین، براش، پریست، متریال و منابع حرفه‌ای؛ بعضی رایگان و بعضی تجاری.</p></div>
+      <div class="software-catalog reveal" aria-label="Software categories">
+        <article class="software-card" data-software="AutoCAD"><header><div><span class="software-index">01</span><h3>AutoCAD</h3><p>ابزارهای تولید نقشه، استانداردسازی و اتوماسیون.</p></div></header><div class="software-tags"><span>Scripts</span><span>Blocks</span><span>CTB</span><span>Templates</span></div></article>
+        <article class="software-card" data-software="Photoshop"><header><div><span class="software-index">02</span><h3>Photoshop</h3><p>منابع پست‌پروداکشن و ارائه معماری.</p></div></header><div class="software-tags"><span>Brushes</span><span>Actions</span><span>PSD</span><span>Presets</span></div></article>
+        <article class="software-card" data-software="3ds Max"><header><div><span class="software-index">03</span><h3>3ds Max</h3><p>ابزارها و منابع مدل‌سازی، متریال و ورک‌فلو.</p></div></header><div class="software-tags"><span>Plugins</span><span>Scripts</span><span>Models</span><span>Materials</span></div></article>
+        <article class="software-card"><header><div><span class="software-index">04</span><h3>Lumion</h3><p>Scene resources, materials and presentation presets.</p></div></header><div class="software-tags"><span>Scenes</span><span>Materials</span><span>Presets</span></div></article>
+        <article class="software-card"><header><div><span class="software-index">05</span><h3>D5 Render</h3><p>Assets, lighting workflows and material resources.</p></div></header><div class="software-tags"><span>Assets</span><span>Materials</span><span>Lighting</span></div></article>
+        <article class="software-card"><header><div><span class="software-index">06</span><h3>AI Tools</h3><p>Prompt systems and AI-assisted production resources.</p></div></header><div class="software-tags"><span>Prompts</span><span>Workflows</span><span>Templates</span></div></article>
+      </div>
+      <div class="tools-status-line"><i></i><span data-v06-i18n="tools.note">ابزارها بر اساس نرم‌افزار و نوع فایل دسته‌بندی می‌شوند و خریدها و دانلودها به حساب کاربری متصل هستند.</span></div>
+      <div class="store-toolbar reveal"><div class="category-scroll" id="toolCategories"></div><div class="store-note"><span class="live-dot"></span><span>Free / Premium · Versioned Downloads · License Ready</span></div></div>
       <div class="products-grid" id="productsGrid"></div>
     </section>
 
@@ -126,10 +136,53 @@
       <div class="about-diagram reveal" aria-hidden="true"><div class="diagram-ring ring-a"></div><div class="diagram-ring ring-b"></div><div class="diagram-line line-a"></div><div class="diagram-line line-b"></div><span class="diagram-label dl1">DESIGN</span><span class="diagram-label dl2">CG</span><span class="diagram-label dl3">TOOLS</span></div>
     </section>
 
-    <section class="section-shell section contact-section" id="contact"><div class="contact-card reveal"><div><span class="eyebrow">07 / CONTACT</span><h2>پروژه، همکاری یا ایده‌ای برای ابزار داری؟</h2><p>برای درخواست پروژه یا همکاری می‌توانی از اینستاگرام در تماس باشی. فرم حرفه‌ای درخواست پروژه در فاز آنلاین اضافه می‌شود.</p></div><a class="contact-link" href="https://www.instagram.com/sadafalizadeh_arch/" target="_blank" rel="noreferrer"><span>@sadafalizadeh_arch</span><b>↗</b></a></div></section>
+    <section class="section-shell section" id="contact">
+      <div class="section-heading reveal"><div><span class="eyebrow">07 / CONTACT</span><h2 data-v06-i18n="contact.title">تماس و همکاری</h2></div><p data-v06-i18n="contact.body">برای پروژه معماری، همکاری حرفه‌ای یا پشتیبانی ابزارها از مسیر مناسب استفاده کن.</p></div>
+      <div class="contact-hub">
+        <article class="contact-panel primary reveal">
+          <div><span class="eyebrow">DIRECT CONTACT</span><h3>@sadafalizadeh_arch</h3><p>برای ارتباط عمومی، معرفی همکاری یا مشاهده‌ی آخرین کارها می‌توانی از اینستاگرام استفاده کنی.</p></div>
+          <div class="contact-actions"><a href="https://www.instagram.com/sadafalizadeh_arch/" target="_blank" rel="noreferrer">Instagram ↗</a><button type="button" id="openInquiryBtn">درخواست پروژه</button><button type="button" id="openSupportBtn">پشتیبانی</button></div>
+        </article>
+
+        <article class="contact-panel reveal" id="project-inquiry">
+          <span class="eyebrow">PROJECT INQUIRY</span><h3 data-v06-i18n="inquiry.title">درخواست پروژه</h3><p data-v06-i18n="inquiry.body">اطلاعات اولیه پروژه را ثبت کن تا برای ادامه گفتگو با شما تماس گرفته شود.</p>
+          <form class="v06-form" id="projectInquiryForm">
+            <label>نام و نام خانوادگی<input name="full_name" required maxlength="120"></label>
+            <label>ایمیل<input name="email" type="email" required maxlength="200" dir="ltr"></label>
+            <label>شماره تماس<input name="mobile" inputmode="tel" maxlength="40" dir="ltr"></label>
+            <label>شرکت / برند<input name="company" maxlength="160"></label>
+            <label>نوع پروژه<select name="project_type"><option value="Architecture">معماری</option><option value="Interior">طراحی داخلی</option><option value="Villa">ویلا</option><option value="Commercial">تجاری</option><option value="Hospitality">اقامتی / گردشگری</option><option value="Visualization">Visualization</option><option value="Other">سایر</option></select></label>
+            <label>لوکیشن پروژه<input name="project_location" maxlength="160"></label>
+            <label>متراژ<input name="area" maxlength="80" placeholder="مثلاً 250 m²"></label>
+            <label>بازه بودجه<input name="budget" maxlength="120"></label>
+            <label class="wide">زمان‌بندی تقریبی<input name="timeline" maxlength="120"></label>
+            <label class="wide">توضیحات پروژه<textarea name="message" required maxlength="5000" placeholder="شرح کوتاه پروژه، نیازها و مرحله فعلی..."></textarea></label>
+            <div class="form-submit"><span class="form-note">اطلاعات فقط برای بررسی درخواست و تماس با شما استفاده می‌شود.</span><button class="btn btn-primary" type="submit">ثبت درخواست →</button></div>
+            <p class="form-message v06-message wide"></p>
+          </form>
+        </article>
+
+        <article class="contact-panel reveal" id="support">
+          <span class="eyebrow">SUPPORT</span><h3 data-v06-i18n="support.title">پشتیبانی</h3><p data-v06-i18n="support.body">برای سؤال، مشکل دانلود، لایسنس یا استفاده از ابزارها یک پیام پشتیبانی ثبت کن.</p>
+          <form class="v06-form" id="supportForm">
+            <label>نام و نام خانوادگی<input name="full_name" required maxlength="120"></label>
+            <label>ایمیل<input name="email" type="email" required maxlength="200" dir="ltr"></label>
+            <label>دسته‌بندی<select name="category"><option value="download">دانلود</option><option value="license">لایسنس</option><option value="payment">پرداخت</option><option value="technical">مشکل فنی</option><option value="general">سایر</option></select></label>
+            <label>موضوع<input name="subject" required maxlength="220"></label>
+            <label class="wide">پیام<textarea name="message" required maxlength="5000"></textarea></label>
+            <div class="form-submit"><span class="form-note">اگر وارد حساب باشی، درخواست پشتیبانی به حساب کاربری‌ات متصل می‌شود.</span><button class="btn btn-primary" type="submit">ارسال پیام →</button></div>
+            <p class="form-message v06-message wide"></p>
+          </form>
+          <div class="support-account-note">برای پیگیری خریدها، دانلودها و لایسنس‌ها بهتر است ابتدا وارد حساب کاربری شوی.</div>
+        </article>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer section-shell"><div class="footer-brand"><strong>Sadaf Alizadeh</strong><span>Architecture · Education · Digital Tools</span></div><div class="footer-meta"><span>© 2026</span><a href="#top">بالا ↑</a></div></footer>
+
+  <!-- FIRST LANGUAGE CHOICE -->
+  <div class="modal" id="languageChoiceModal" aria-hidden="true"><button class="modal-backdrop" aria-label="انتخاب زبان"></button><article class="modal-panel language-choice-card"><span class="eyebrow">LANGUAGE / زبان</span><h3>زبان سایت را انتخاب کنید</h3><p>Choose how you want to continue. You can change this later from the header.</p><div class="language-choice-actions"><button type="button" data-language-choice="fa"><strong>فارسی</strong><span>ادامه با نسخه فارسی</span></button><button type="button" data-language-choice="en"><strong>English</strong><span>Continue in English</span></button></div></article></div>
 
   <!-- AUTH -->
   <div class="modal" id="authModal" aria-hidden="true"><button class="modal-backdrop" data-close-modal aria-label="بستن"></button><article class="modal-panel auth-panel"><button class="modal-close" data-close-modal>×</button><div class="auth-head"><span class="eyebrow">ACCOUNT</span><h3>ورود یا عضویت</h3><p>خریدها، دانلودها و لایسنس‌ها به حساب شما متصل می‌شوند.</p></div><div class="auth-tabs"><button class="active" data-auth-tab="login">ورود</button><button data-auth-tab="register">عضویت</button></div>
@@ -161,4 +214,5 @@
   <script src="assets/config.js"></script>
   <script src="data/seed.js"></script>
   <script src="assets/app.js"></script>
+  <script src="assets/v06.js"></script>
 </body></html>
