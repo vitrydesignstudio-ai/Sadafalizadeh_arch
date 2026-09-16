@@ -1,0 +1,15 @@
+{
+  "authentication": {
+    "methods": ["phone", "email"],
+    "profile": ["name", "avatar", "downloads", "purchases"]
+  },
+  "language": {
+    "default": "fa",
+    "options": ["fa", "en"],
+    "selection": "after-login"
+  },
+  "forms": {
+    "project_request": ["name", "contact", "project_type", "description", "budget_range"],
+    "support": ["subject", "message", "attachment"]
+  }
+}
