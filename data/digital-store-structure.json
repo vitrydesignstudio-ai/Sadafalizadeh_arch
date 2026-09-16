@@ -1,0 +1,27 @@
+{
+  "title": "Digital Store",
+  "description": "Architecture digital tools, free and premium resources",
+  "categories": [
+    {
+      "name": "Photoshop",
+      "items": ["Brushes", "Post Production Presets", "Textures", "Templates"]
+    },
+    {
+      "name": "AutoCAD",
+      "items": ["Scripts", "Blocks", "CTB Files", "Templates"]
+    },
+    {
+      "name": "3ds Max",
+      "items": ["Plugins", "Scripts", "Models", "Materials"]
+    },
+    {
+      "name": "Lumion",
+      "items": ["Scenes", "Materials", "Presets"]
+    },
+    {
+      "name": "D5 Render",
+      "items": ["Assets", "Materials", "Lighting Presets"]
+    }
+  ],
+  "access": ["Free", "Premium"]
+}
