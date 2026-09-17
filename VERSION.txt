@@ -1,5 +1,8 @@
 SadafAlizadeh_arch Platform
-Version: 0.6.0 DEPLOY READY
+Version: 0.7.0 PRODUCTION
 Frontend: Persian-first RTL + English
-Hosting target: Vercel
-Backend target: Supabase
+Experience: Personal Portfolio + Digital Tools + Education + Visual Storytelling
+Hosting: Vercel
+Backend: Supabase
+CMS/Auth/Account/Checkout/Admin: preserved and extended
+Content policy: real portfolio/CMS content only; no demo projects, tutorials or products
