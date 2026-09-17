@@ -41,3 +41,10 @@
 .support-account-note{margin-top:12px;padding:10px 12px;border-radius:10px;background:#f6f8fb;color:#697586;font-size:11px;line-height:1.7}
 @media(max-width:980px){.software-catalog{grid-template-columns:repeat(2,minmax(0,1fr))}.contact-hub{grid-template-columns:1fr}.contact-panel.primary{grid-column:auto;grid-template-columns:1fr}.contact-actions{justify-content:flex-start}}
 @media(max-width:640px){.software-catalog{grid-template-columns:1fr}.v06-form{grid-template-columns:1fr}.v06-form label.wide,.v06-form .form-submit{grid-column:auto}.language-choice-actions{grid-template-columns:1fr}.contact-panel{padding:18px}}
+
+/* Language-choice interaction fix: keep the panel above the backdrop on touch devices. */
+#languageChoiceModal .modal-backdrop{z-index:0;}
+#languageChoiceModal .language-choice-card{position:absolute;z-index:2;pointer-events:auto;}
+#languageChoiceModal .language-choice-actions,
+#languageChoiceModal .language-choice-actions button{position:relative;z-index:3;pointer-events:auto;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+#languageChoiceModal .language-choice-actions button:active{transform:translateY(1px);}
