@@ -12,11 +12,13 @@ for (const item of ['index.html', 'assets', 'data']) {
   if (existsSync(src)) await cp(src, path.join(out, item), { recursive: true });
 }
 
-// Load the incremental v0.7 experience on top of the existing site without rewriting index.html.
+// Load incremental experience layers on top of the existing site without rewriting index.html.
 const outIndex = path.join(out, 'index.html');
 let html = await readFile(outIndex, 'utf8');
 if (!html.includes('assets/v07.css')) html = html.replace('</head>', '  <link rel="stylesheet" href="assets/v07.css" />\n</head>');
+if (!html.includes('assets/v08.css')) html = html.replace('</head>', '  <link rel="stylesheet" href="assets/v08.css" />\n</head>');
 if (!html.includes('assets/v07.js')) html = html.replace('</body>', '  <script src="assets/v07.js" defer></script>\n</body>');
+if (!html.includes('assets/v08.js')) html = html.replace('</body>', '  <script src="assets/v08.js" defer></script>\n</body>');
 await writeFile(outIndex, html, 'utf8');
 
 // These are browser-safe public defaults only. Environment variables still override them.
@@ -30,4 +32,4 @@ const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || DEFAULT_SUPABASE_ANON_K
 const siteUrl = process.env.SITE_URL || DEFAULT_SITE_URL;
 const cfg = `window.SADAF_CONFIG = {\n  SUPABASE_URL: '${esc(supabaseUrl)}',\n  SUPABASE_ANON_KEY: '${esc(supabaseAnonKey)}',\n  SITE_URL: '${esc(siteUrl)}',\n  DOWNLOAD_URL_TTL_SECONDS: ${Number(process.env.DOWNLOAD_URL_TTL_SECONDS || 300)},\n  GATEWAY_ENABLED: ${String(process.env.GATEWAY_ENABLED || 'false').toLowerCase() === 'true'},\n  PAYMENT_PROVIDER: '${esc(process.env.PAYMENT_PROVIDER || 'zarinpal')}'\n};\n`;
 await writeFile(path.join(out, 'assets', 'config.js'), cfg, 'utf8');
-console.log('Built dist/ with public runtime config and v0.7 refinement layer.');
+console.log('Built dist/ with public runtime config and v0.8 refinement layer.');
