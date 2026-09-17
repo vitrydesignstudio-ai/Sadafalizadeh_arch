@@ -18,6 +18,7 @@ jobs:
           node --check assets/app.js
           node --check assets/v06.js
           node --check assets/v07.js
+          node --check assets/v08.js
       - name: Build production output
         run: npm run build
       - name: Verify critical output files
@@ -28,10 +29,14 @@ jobs:
           test -f dist/assets/v06.css
           test -f dist/assets/v07.js
           test -f dist/assets/v07.css
+          test -f dist/assets/v08.js
+          test -f dist/assets/v08.css
           test -f dist/assets/sadaf-portrait.webp
           grep -q "DIGITAL TOOLS" dist/index.html
           grep -q "projectInquiryForm" dist/index.html
           grep -q "supportForm" dist/index.html
           grep -q "assets/v07.css" dist/index.html
           grep -q "assets/v07.js" dist/index.html
+          grep -q "assets/v08.css" dist/index.html
+          grep -q "assets/v08.js" dist/index.html
           grep -q "nhqewuniroljxgaefkgx.supabase.co" dist/assets/config.js
