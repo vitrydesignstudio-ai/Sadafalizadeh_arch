@@ -2,10 +2,34 @@
 'use strict';
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const PORTRAIT_SOURCES=[
+  '/assets/sadaf-portrait.webp',
+  'https://raw.githubusercontent.com/vitrydesignstudio-ai/Sadafalizadeh_arch/main/assets/sadaf-portrait.webp'
+];
 function applyIdentity(){
   const role=$('.hero-role'); if(role)role.textContent='ARCHITECTURAL DESIGNER & VISUAL CREATIVE';
   const h1=$('.personal-hero-copy h1'); if(h1)h1.innerHTML='<span>صدف علیزاده</span><em>معماری، تصویر و روایت</em>';
-  const portrait=$('.portrait-frame img'); if(portrait){portrait.src='assets/sadaf-portrait.webp';portrait.alt='پرتره صدف علیزاده';portrait.loading='eager';portrait.decoding='async';portrait.fetchPriority='high';}
+  const portrait=$('.portrait-frame img');
+  if(portrait){
+    portrait.alt='پرتره صدف علیزاده';
+    portrait.loading='eager';
+    portrait.decoding='async';
+    portrait.fetchPriority='high';
+    let sourceIndex=0;
+    const loadNext=()=>{
+      if(sourceIndex<PORTRAIT_SOURCES.length){
+        portrait.src=PORTRAIT_SOURCES[sourceIndex++];
+      }else{
+        portrait.style.display='none';
+        const frame=portrait.closest('.portrait-frame');
+        if(frame)frame.classList.add('portrait-unavailable');
+        const card=portrait.closest('.portrait-card');
+        if(card)card.classList.add('portrait-fallback');
+      }
+    };
+    portrait.addEventListener('error',loadNext);
+    loadNext();
+  }
   const ctas=$$('.hero-actions a'); if(ctas[0])ctas[0].setAttribute('href','#profile'); if(ctas[1])ctas[1].setAttribute('href','#work');
 }
 function restoreMainNavOrder(){
