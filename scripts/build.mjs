@@ -12,7 +12,15 @@ for (const item of ['index.html', 'assets', 'data']) {
   if (existsSync(src)) await cp(src, path.join(out, item), { recursive: true });
 }
 
+// These are browser-safe public defaults only. Environment variables still override them.
+const DEFAULT_SUPABASE_URL = 'https://nhqewuniroljxgaefkgx.supabase.co';
+const DEFAULT_SUPABASE_ANON_KEY = 'sb_publishable_0WQ5ts4mMkLLZM0WJFstGQ_xxx1QOg6';
+const DEFAULT_SITE_URL = 'https://sadafalizadeh-arch.vercel.app';
+
 const esc = (v='') => String(v).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-const cfg = `window.SADAF_CONFIG = {\n  SUPABASE_URL: '${esc(process.env.SUPABASE_URL || '')}',\n  SUPABASE_ANON_KEY: '${esc(process.env.SUPABASE_ANON_KEY || '')}',\n  SITE_URL: '${esc(process.env.SITE_URL || '')}',\n  DOWNLOAD_URL_TTL_SECONDS: ${Number(process.env.DOWNLOAD_URL_TTL_SECONDS || 300)},\n  GATEWAY_ENABLED: ${String(process.env.GATEWAY_ENABLED || 'false').toLowerCase() === 'true'},\n  PAYMENT_PROVIDER: '${esc(process.env.PAYMENT_PROVIDER || 'zarinpal')}'\n};\n`;
+const supabaseUrl = process.env.SUPABASE_URL || DEFAULT_SUPABASE_URL;
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || DEFAULT_SUPABASE_ANON_KEY;
+const siteUrl = process.env.SITE_URL || DEFAULT_SITE_URL;
+const cfg = `window.SADAF_CONFIG = {\n  SUPABASE_URL: '${esc(supabaseUrl)}',\n  SUPABASE_ANON_KEY: '${esc(supabaseAnonKey)}',\n  SITE_URL: '${esc(siteUrl)}',\n  DOWNLOAD_URL_TTL_SECONDS: ${Number(process.env.DOWNLOAD_URL_TTL_SECONDS || 300)},\n  GATEWAY_ENABLED: ${String(process.env.GATEWAY_ENABLED || 'false').toLowerCase() === 'true'},\n  PAYMENT_PROVIDER: '${esc(process.env.PAYMENT_PROVIDER || 'zarinpal')}'\n};\n`;
 await writeFile(path.join(out, 'assets', 'config.js'), cfg, 'utf8');
 console.log('Built dist/ with public runtime config.');
